@@ -1,0 +1,25 @@
+# NOTE: genome paths use ${MIRROR_FNA_DIR} (set in config.sh). Regenerate the genomes
+# with scripts/make_mirror_distance.py, which downloads them there.
+# DISTANCE-STRATIFIED mirror set — rank resolution vs genomic distance to RaPDTool's DB.
+# Selected with make_mirror_distance.py; Mash distance to nearest RaPDTool genome measured.
+# Expected rank per RaPDTool's mash thresholds: species >95% id, genus 93-95%, higher below.
+#
+# --- positive controls: species IS in RaPDTool (dist 0) -> expect SPECIES ---
+${MIRROR_FNA_DIR}/mirror_84163.fna        # Cryptobacterium curtum (84163)  100.0%  Actinomycetota
+${MIRROR_FNA_DIR}/mirror_84156.fna        # Archaeoglobus profundus (84156) 100.0%  Methanobacteriota
+# --- species-close: novel species, very near a DB member (95-99%) -> species/genus ---
+${MIRROR_FNA_DIR}/d_1306159.fna      # Gracilibacillus sp. (1306159)    99.5%  Bacillota
+${MIRROR_FNA_DIR}/d_3037258.fna      # Pantoea sp. X85 (3037258)        98.3%  Pseudomonadota
+${MIRROR_FNA_DIR}/d_1316411.fna      # Streptococcus sp. HSISS2 (1316411) 97.0% Bacillota
+# --- genus zone (93-95%) -> expect GENUS ---
+${MIRROR_FNA_DIR}/mirror_2675877.fna      # Hymenobacter sp. (2675877)       94.5%  Bacteroidota
+${MIRROR_FNA_DIR}/mirror_1306274.fna      # Nostoc flagelliforme (1306274)   94.1%  Cyanobacteriota
+${MIRROR_FNA_DIR}/mirror_3683142.fna      # Exiguobacterium sp. (3683142)    92.3%  Bacillota
+# --- family/order zone (81-91%) -> expect FAMILY/ORDER ---
+${MIRROR_FNA_DIR}/d_2903875.fna      # Streptomyces sp. NBC_01460 (2903875) 90.9% Actinomycetota
+${MIRROR_FNA_DIR}/d_2866199.fna      # Bradyrhizobium sp. ISRA463 (2866199) 90.1% Pseudomonadota
+${MIRROR_FNA_DIR}/d_3569461.fna      # Roseibium sp. M-1 (3569461)      81.8%  Pseudomonadota
+# --- distant / novel genus-family (70-76%, mash saturated) -> expect HIGHER/abstain ---
+${MIRROR_FNA_DIR}/d_164514.fna       # Blattabacterium punctulatus (164514) 75.6% Bacteroidota
+${MIRROR_FNA_DIR}/d_225322.fna       # Pasteuria ramosa (225322)        73.7%  Bacillota
+${MIRROR_FNA_DIR}/d_373994.fna       # Rivularia sp. PCC 7116 (373994)  73.7%  Cyanobacteriota

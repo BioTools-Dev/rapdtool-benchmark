@@ -1,0 +1,4 @@
+tool,replicate,wall_seconds,peak_rss_kb,peak_rss_gb,exit_code
+rapdtool,1,99.7,7053856,6.73,0
+rapdtool_screen,1,89.2,7053176,6.73,0
+kraken2_full,1,1046.4,108863700,103.82,0

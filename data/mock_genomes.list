@@ -1,0 +1,31 @@
+# NOTE: genome paths use ${FOCUS_DB}/db/ (RaPDTool type-material set; set in config.sh).
+# Benchmark mock community — 20 type-material genomes (10 reference + 10 conflictive)
+# Selected with check_representation.py (--sample 1500 --seed 42) against
+#   Kraken2 standard/16/8 inspect.txt  and  MetaPhlAn vJan26_CHOCOPhlAnSGB .pkl
+# GCA per taxid resolved authoritatively from acc_taxid_strain.tsv. ~15 phyla total.
+# Feed to: ./make_mock.sh -o mock -t 16 -l mock_genomes.list   (mock lives inside the kit)
+#
+# --- REFERENCE, 5 clinical (present in Kraken full/16/8 AND MetaPhlAn) ---
+${FOCUS_DB}/db/GCA_001281725.1.fna   # Escherichia coli (562)          Pseudomonadota
+${FOCUS_DB}/db/GCA_002902205.1.fna   # Staphylococcus aureus (1280)    Bacillota
+${FOCUS_DB}/db/GCA_001042925.1.fna   # Pseudomonas aeruginosa (287)    Pseudomonadota
+${FOCUS_DB}/db/GCA_003391395.1.fna   # Mycobacterium marinum (1781)    Actinomycetota
+${FOCUS_DB}/db/GCA_017979495.1.fna   # Helicobacter cinaedi (213)      Campylobacterota
+# --- REFERENCE, 5 phylum-diversifiers (also present in all competitor DBs) ---
+${FOCUS_DB}/db/GCA_000147335.1.fna   # Gloeothece verrucosa (497965)   Cyanobacteriota
+${FOCUS_DB}/db/GCA_032595875.2.fna   # Borreliella andersonii (42109)  Spirochaetota
+${FOCUS_DB}/db/GCA_025997855.1.fna   # Deinococcus aetherius (200252)  Deinococcota
+${FOCUS_DB}/db/GCA_900095705.1.fna   # Fusobacterium massiliense (1852365) Fusobacteriota
+${FOCUS_DB}/db/GCA_000255135.1.fna   # Marinitoga piezophila (443254)  Thermotogota
+#
+# --- CONFLICTIVE (absent from Kraken full/16/8 AND MetaPhlAn): RaPDTool-only ---
+${FOCUS_DB}/db/GCA_039542925.1.fna   # Streptomyces coeruleoprunus (285563)    Actinomycetota
+${FOCUS_DB}/db/GCA_052601015.1.fna   # Chitinimonas violaceus (3459088)        Pseudomonadota
+${FOCUS_DB}/db/GCA_900343155.1.fna   # Lactimicrobium massiliense (2161814)    Bacillota
+${FOCUS_DB}/db/GCA_050309965.1.fna   # Paraniabella aurantiaca (3393740)       Bacteroidota
+${FOCUS_DB}/db/GCA_049472675.1.fna   # Deferribacter thermophilus (53573)      Deferribacterota
+${FOCUS_DB}/db/GCA_000178855.1.fna   # Ktedonobacter racemifer (363277)        Chloroflexota
+${FOCUS_DB}/db/GCA_035656455.1.fna   # Haloarcula sediminis (3111777)          Archaea (Methanobacteriota)
+${FOCUS_DB}/db/GCA_030249855.1.fna   # Helicobacter zhangjianzhongii (2974574) Campylobacterota
+${FOCUS_DB}/db/GCA_003612125.1.fna   # Corallococcus praedator (2316724)       Myxococcota
+${FOCUS_DB}/db/GCA_036860695.1.fna   # Rosettibacter firmus (3111522)          Ignavibacteriota

@@ -1,0 +1,52 @@
+
+Reference genomes detected (mash screen):
+
+.-------------------------------+---------+----------+---------------.
+| Species                       | taxID   | Identity | Shared-hashes |
++-------------------------------+---------+----------+---------------+
+| Lactimicrobium massiliense    | 2161814 | 1.0000   | 1000/1000     |
+| Chitinimonas violaceus        | 3459088 | 1.0000   | 1000/1000     |
+| Paraniabella aurantiaca       | 3393740 | 1.0000   | 1000/1000     |
+| Deferribacter thermophilus    | 53573   | 1.0000   | 1000/1000     |
+| Streptomyces coeruleoprunus   | 285563  | 1.0000   | 1000/1000     |
+| Borreliella andersonii        | 42109   | 1.0000   | 1000/1000     |
+| Staphylococcus aureus         | 1280    | 1.0000   | 1000/1000     |
+| Escherichia coli              | 562     | 1.0000   | 1000/1000     |
+| Helicobacter cinaedi          | 213     | 1.0000   | 999/1000      |
+| Pseudomonas aeruginosa        | 287     | 0.9999   | 998/1000      |
+| Haloarcula sediminis          | 3111777 | 0.9999   | 997/1000      |
+| Mycobacterium marinum         | 1781    | 0.9999   | 997/1000      |
+| Fusobacterium massiliense     | 1852365 | 0.9998   | 995/1000      |
+| Helicobacter zhangjianzhongii | 2974574 | 0.9995   | 989/1000      |
+| Gloeothece verrucosa          | 2546359 | 0.9993   | 985/1000      |
+| Marinitoga piezophila         | 149715  | 0.9989   | 978/1000      |
+| Deinococcus aetherius         | 200252  | 0.9986   | 970/1000      |
+| Rosettibacter firmus          | 3111522 | 0.9958   | 916/1000      |
+| Ktedonobacter racemifer       | 363277  | 0.9930   | 863/1000      |
+| Corallococcus praedator       | 2316724 | 0.9817   | 679/1000      |
+'-------------------------------+---------+----------+---------------'
+
+
+FOCUS profile
+Be cautious at species taxonomic level:
+.-------------------------------+--------------------.
+| Species                       | relative_abundance |
++-------------------------------+--------------------+
+| Streptomyces_coeruleoprunus   | 14.47              |
+| Escherichia_coli              | 12.62              |
+| Staphylococcus_aureus         | 10.86              |
+| Chitinimonas_violaceus        | 9.18               |
+| Lactimicrobium_massiliense    | 7.92               |
+| Pseudomonas_aeruginosa        | 6.69               |
+| Mycobacterium_marinum         | 5.25               |
+| Paraniabella_aurantiaca       | 4.76               |
+| Deferribacter_thermophilus    | 4.15               |
+| Helicobacter_cinaedi          | 3.62               |
+| Gloeothece_verrucosa          | 3.03               |
+| Ktedonobacter_racemifer       | 2.52               |
+| Haloarcula_sediminis          | 2.05               |
+| Borreliella_andersonii        | 1.56               |
+| Deinococcus_aetherius         | 1.37               |
+| Helicobacter_zhangjianzhongii | 1.36               |
+| Corallococcus_praedator       | 1.06               |
+'-------------------------------+--------------------'

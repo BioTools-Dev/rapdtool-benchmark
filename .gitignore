@@ -1,0 +1,22 @@
+# Local machine config (paths). Ship config.sh.example, never config.sh.
+config.sh
+
+# Python
+__pycache__/
+*.pyc
+
+# Large regenerable data must never be committed:
+#   - simulated reads / assemblies  -> regenerate with scripts/make_mock.sh --seed 42
+#   - raw Kraken2/Bracken outputs   -> intermediate, not needed
+#   - downloaded genome FASTAs      -> re-download with NCBI datasets
+results/**/*.kraken
+results/**/*.bracken
+results/**/*.fastq
+results/**/*.fasta
+results/**/screen_reads*
+results/**/species_bins/
+mirror_db/
+*.zip
+
+# OS
+.DS_Store

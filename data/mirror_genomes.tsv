@@ -1,0 +1,14 @@
+# MIRROR set: species in Kraken2 standard, ABSENT from RaPDTool's type-material database.
+# Population: 9640 species (30.6 % of Kraken2's species); stratified by phylum, seed 42.
+# Purpose: characterise RaPDTool's OUT-OF-DOMAIN failure mode (silence vs. confident misassignment).
+taxid	species	phylum	looks_uncultured
+1872567	Ancylobacter sp.	Pseudomonadota	yes
+639011	Streptomyces sp. G30	Actinomycetota	yes
+2916802	Parageobacillus sp. KH3-4	Bacillota	yes
+2795738	Sphingobacterium sp. UDSM-2020	Bacteroidota	yes
+1442558	Synechococcus sp. TAK9802	Cyanobacteriota	yes
+229545	Aster yellows witches'-broom phytoplasma	Mycoplasmatota	no
+3121295	Haladaptatus sp. SPP-AMP-3	Methanobacteriota	yes
+3133279	Sorangium sp. So ce119	Myxococcota	yes
+1660078	Campylobacter sp. RM5004	Campylobacterota	yes
+3447380	Solidesulfovibrio sp. DCME	Thermodesulfobacteriota	yes

@@ -1,0 +1,5 @@
+tool,dataset,step,wall_seconds,peak_rss_gb,exit_code
+metawrap,ln_30M,binning,487.4,9.63,0
+metawrap,ln_30M,refine,3178.8,34.93,0
+metawrap,zymo,binning,304.2,6.93,0
+metawrap,zymo,refine,2238.4,34.15,0

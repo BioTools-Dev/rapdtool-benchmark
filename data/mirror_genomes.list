@@ -1,0 +1,17 @@
+# NOTE: genome paths use ${MIRROR_FNA_DIR} (set in config.sh). Regenerate the genomes
+# with scripts/make_mirror_distance.py, which downloads them there.
+# MIRROR set — species present in Kraken2 standard, ABSENT from RaPDTool's
+# type-material database. Selected by make_mirror_set.py (--sample 10 --seed 42)
+# from a pool of 10,973 prokaryotic species; stratified one per phylum.
+# Purpose: characterise RaPDTool's OUT-OF-DOMAIN failure mode.
+#
+${MIRROR_FNA_DIR}/mirror_1288970.fna   # Magnetospira sp. QH-2 (1288970)   Pseudomonadota
+${MIRROR_FNA_DIR}/mirror_84163.fna   # Cryptobacterium curtum (84163)   Actinomycetota
+${MIRROR_FNA_DIR}/mirror_3683142.fna   # Exiguobacterium sp. EF_C8 (3683142)   Bacillota
+${MIRROR_FNA_DIR}/mirror_2675877.fna   # Hymenobacter sp. BRD67 (2675877)   Bacteroidota
+${MIRROR_FNA_DIR}/mirror_1306274.fna   # Nostoc flagelliforme (1306274)   Cyanobacteriota
+${MIRROR_FNA_DIR}/mirror_84156.fna   # Archaeoglobus profundus (84156)   Methanobacteriota
+${MIRROR_FNA_DIR}/mirror_38986.fna   # Acholeplasma palmae (38986)   Mycoplasmatota
+${MIRROR_FNA_DIR}/mirror_3722736.fna   # Arcobacter denitrificans (SeqCode) (3722736)   Campylobacterota
+${MIRROR_FNA_DIR}/mirror_2358.fna   # Desulfomonile tiedjei (2358)   Thermodesulfobacteriota
+${MIRROR_FNA_DIR}/mirror_3133334.fna   # Sorangium sp. So ce1182 (3133334)   Myxococcota

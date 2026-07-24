@@ -1,0 +1,191 @@
+tool	rank	metric	sample	value
+Gold standard	superkingdom	Bray-Curtis distance	mock	0.0
+Gold standard	phylum	Bray-Curtis distance	mock	0.0
+Gold standard	class	Bray-Curtis distance	mock	0.0
+Gold standard	order	Bray-Curtis distance	mock	0.0
+Gold standard	family	Bray-Curtis distance	mock	0.0
+Gold standard	genus	Bray-Curtis distance	mock	0.0
+Gold standard	species	Bray-Curtis distance	mock	0.0
+Gold standard	superkingdom	Shannon diversity	mock	0.0
+Gold standard	superkingdom	Shannon equitability	mock	0.0
+Gold standard	phylum	Shannon diversity	mock	0.5459448394861557
+Gold standard	phylum	Shannon equitability	mock	0.7876319125255979
+Gold standard	class	Shannon diversity	mock	0.5459448394861557
+Gold standard	class	Shannon equitability	mock	0.7876319125255979
+Gold standard	order	Shannon diversity	mock	1.2105569937442344
+Gold standard	order	Shannon equitability	mock	0.8732322857941295
+Gold standard	family	Shannon diversity	mock	1.8899219715532485
+Gold standard	family	Shannon equitability	mock	0.9712277683893855
+Gold standard	genus	Shannon diversity	mock	2.0104575474446387
+Gold standard	genus	Shannon equitability	mock	0.9668257112053894
+Gold standard	species	Shannon diversity	mock	2.0104575474446387
+Gold standard	species	Shannon equitability	mock	0.9668257112053894
+Gold standard	superkingdom	True positives	mock	1.0
+Gold standard	superkingdom	False negatives	mock	0.0
+Gold standard	superkingdom	False positives	mock	0.0
+Gold standard	superkingdom	Completeness	mock	1.0
+Gold standard	superkingdom	Purity	mock	1.0
+Gold standard	superkingdom	F1 score	mock	1.0
+Gold standard	superkingdom	Jaccard index	mock	1.0
+Gold standard	phylum	True positives	mock	2.0
+Gold standard	phylum	False negatives	mock	0.0
+Gold standard	phylum	False positives	mock	0.0
+Gold standard	phylum	Completeness	mock	1.0
+Gold standard	phylum	Purity	mock	1.0
+Gold standard	phylum	F1 score	mock	1.0
+Gold standard	phylum	Jaccard index	mock	1.0
+Gold standard	class	True positives	mock	2.0
+Gold standard	class	False negatives	mock	0.0
+Gold standard	class	False positives	mock	0.0
+Gold standard	class	Completeness	mock	1.0
+Gold standard	class	Purity	mock	1.0
+Gold standard	class	F1 score	mock	1.0
+Gold standard	class	Jaccard index	mock	1.0
+Gold standard	order	True positives	mock	4.0
+Gold standard	order	False negatives	mock	0.0
+Gold standard	order	False positives	mock	0.0
+Gold standard	order	Completeness	mock	1.0
+Gold standard	order	Purity	mock	1.0
+Gold standard	order	F1 score	mock	1.0
+Gold standard	order	Jaccard index	mock	1.0
+Gold standard	family	True positives	mock	7.0
+Gold standard	family	False negatives	mock	0.0
+Gold standard	family	False positives	mock	0.0
+Gold standard	family	Completeness	mock	1.0
+Gold standard	family	Purity	mock	1.0
+Gold standard	family	F1 score	mock	1.0
+Gold standard	family	Jaccard index	mock	1.0
+Gold standard	genus	True positives	mock	8.0
+Gold standard	genus	False negatives	mock	0.0
+Gold standard	genus	False positives	mock	0.0
+Gold standard	genus	Completeness	mock	1.0
+Gold standard	genus	Purity	mock	1.0
+Gold standard	genus	F1 score	mock	1.0
+Gold standard	genus	Jaccard index	mock	1.0
+Gold standard	species	True positives	mock	8.0
+Gold standard	species	False negatives	mock	0.0
+Gold standard	species	False positives	mock	0.0
+Gold standard	species	Completeness	mock	1.0
+Gold standard	species	Purity	mock	1.0
+Gold standard	species	F1 score	mock	1.0
+Gold standard	species	Jaccard index	mock	1.0
+Gold standard	superkingdom	L1 norm error	mock	0.0
+Gold standard	phylum	L1 norm error	mock	0.0
+Gold standard	class	L1 norm error	mock	0.0
+Gold standard	order	L1 norm error	mock	0.0
+Gold standard	family	L1 norm error	mock	0.0
+Gold standard	genus	L1 norm error	mock	0.0
+Gold standard	species	L1 norm error	mock	0.0
+Gold standard	na	Weighted UniFrac error	mock	0.0
+Gold standard	na	Unweighted UniFrac error	mock	0.0
+Gold standard	na	Weighted UniFrac (CAMI)	mock	0.0
+Gold standard	na	Unweighted UniFrac (CAMI)	mock	0.0
+Gold standard	superkingdom	Sum of abundances	mock	1.0
+Gold standard	phylum	Sum of abundances	mock	1.0
+Gold standard	class	Sum of abundances	mock	1.0
+Gold standard	order	Sum of abundances	mock	1.0
+Gold standard	family	Sum of abundances	mock	1.0
+Gold standard	genus	Sum of abundances	mock	1.0
+Gold standard	species	Sum of abundances	mock	1.0
+Gold standard	superkingdom	Taxon counts	mock	1.0
+Gold standard	phylum	Taxon counts	mock	2.0
+Gold standard	class	Taxon counts	mock	2.0
+Gold standard	order	Taxon counts	mock	4.0
+Gold standard	family	Taxon counts	mock	7.0
+Gold standard	genus	Taxon counts	mock	8.0
+Gold standard	species	Taxon counts	mock	8.0
+MetaPhlAn4	superkingdom	Bray-Curtis distance	mock	0.003979199999999996
+MetaPhlAn4	phylum	Bray-Curtis distance	mock	0.04461208477693957
+MetaPhlAn4	class	Bray-Curtis distance	mock	0.04461208477693957
+MetaPhlAn4	order	Bray-Curtis distance	mock	0.04461208999999997
+MetaPhlAn4	family	Bray-Curtis distance	mock	0.059438254702808724
+MetaPhlAn4	genus	Bray-Curtis distance	mock	0.05943825470280874
+MetaPhlAn4	species	Bray-Curtis distance	mock	0.16358385418208074
+MetaPhlAn4	superkingdom	Shannon diversity	mock	0.025963015571980746
+MetaPhlAn4	superkingdom	Shannon equitability	mock	0.03745671381221956
+MetaPhlAn4	phylum	Shannon diversity	mock	0.614025552015741
+MetaPhlAn4	phylum	Shannon equitability	mock	0.5589101435959251
+MetaPhlAn4	class	Shannon diversity	mock	0.614025552015741
+MetaPhlAn4	class	Shannon equitability	mock	0.5589101435959251
+MetaPhlAn4	order	Shannon diversity	mock	1.2865175340413237
+MetaPhlAn4	order	Shannon equitability	mock	0.799358287823359
+MetaPhlAn4	family	Shannon diversity	mock	1.9275297328938883
+MetaPhlAn4	family	Shannon equitability	mock	0.9269458622706803
+MetaPhlAn4	genus	Shannon diversity	mock	2.0572172239253153
+MetaPhlAn4	genus	Shannon equitability	mock	0.9362799074545941
+MetaPhlAn4	species	Shannon diversity	mock	2.0572172239253153
+MetaPhlAn4	species	Shannon equitability	mock	0.9362799074545941
+MetaPhlAn4	superkingdom	True positives	mock	1.0
+MetaPhlAn4	superkingdom	False negatives	mock	0.0
+MetaPhlAn4	superkingdom	False positives	mock	1.0
+MetaPhlAn4	superkingdom	Completeness	mock	1.0
+MetaPhlAn4	superkingdom	Purity	mock	0.5
+MetaPhlAn4	superkingdom	F1 score	mock	0.6666666666666666
+MetaPhlAn4	superkingdom	Jaccard index	mock	0.5
+MetaPhlAn4	phylum	True positives	mock	2.0
+MetaPhlAn4	phylum	False negatives	mock	0.0
+MetaPhlAn4	phylum	False positives	mock	1.0
+MetaPhlAn4	phylum	Completeness	mock	1.0
+MetaPhlAn4	phylum	Purity	mock	0.6666666666666666
+MetaPhlAn4	phylum	F1 score	mock	0.8
+MetaPhlAn4	phylum	Jaccard index	mock	0.6666666666666666
+MetaPhlAn4	class	True positives	mock	2.0
+MetaPhlAn4	class	False negatives	mock	0.0
+MetaPhlAn4	class	False positives	mock	1.0
+MetaPhlAn4	class	Completeness	mock	1.0
+MetaPhlAn4	class	Purity	mock	0.6666666666666666
+MetaPhlAn4	class	F1 score	mock	0.8
+MetaPhlAn4	class	Jaccard index	mock	0.6666666666666666
+MetaPhlAn4	order	True positives	mock	4.0
+MetaPhlAn4	order	False negatives	mock	0.0
+MetaPhlAn4	order	False positives	mock	1.0
+MetaPhlAn4	order	Completeness	mock	1.0
+MetaPhlAn4	order	Purity	mock	0.8
+MetaPhlAn4	order	F1 score	mock	0.888888888888889
+MetaPhlAn4	order	Jaccard index	mock	0.8
+MetaPhlAn4	family	True positives	mock	7.0
+MetaPhlAn4	family	False negatives	mock	0.0
+MetaPhlAn4	family	False positives	mock	1.0
+MetaPhlAn4	family	Completeness	mock	1.0
+MetaPhlAn4	family	Purity	mock	0.875
+MetaPhlAn4	family	F1 score	mock	0.9333333333333333
+MetaPhlAn4	family	Jaccard index	mock	0.875
+MetaPhlAn4	genus	True positives	mock	8.0
+MetaPhlAn4	genus	False negatives	mock	0.0
+MetaPhlAn4	genus	False positives	mock	1.0
+MetaPhlAn4	genus	Completeness	mock	1.0
+MetaPhlAn4	genus	Purity	mock	0.8888888888888888
+MetaPhlAn4	genus	F1 score	mock	0.9411764705882353
+MetaPhlAn4	genus	Jaccard index	mock	0.8888888888888888
+MetaPhlAn4	species	True positives	mock	7.0
+MetaPhlAn4	species	False negatives	mock	1.0
+MetaPhlAn4	species	False positives	mock	2.0
+MetaPhlAn4	species	Completeness	mock	0.875
+MetaPhlAn4	species	Purity	mock	0.7777777777777778
+MetaPhlAn4	species	F1 score	mock	0.823529411764706
+MetaPhlAn4	species	Jaccard index	mock	0.7
+MetaPhlAn4	superkingdom	L1 norm error	mock	0.007958399999999992
+MetaPhlAn4	phylum	L1 norm error	mock	0.08922416999999999
+MetaPhlAn4	class	L1 norm error	mock	0.08922416999999999
+MetaPhlAn4	order	L1 norm error	mock	0.08922417999999994
+MetaPhlAn4	family	L1 norm error	mock	0.11887651
+MetaPhlAn4	genus	L1 norm error	mock	0.11887651
+MetaPhlAn4	species	L1 norm error	mock	0.32716771
+MetaPhlAn4	na	Weighted UniFrac error	mock	0.006823047628333333
+MetaPhlAn4	na	Unweighted UniFrac error	mock	0.24952928410960257
+MetaPhlAn4	na	Weighted UniFrac (CAMI)	mock	0.8405516500000001
+MetaPhlAn4	na	Unweighted UniFrac (CAMI)	mock	16.00000001
+MetaPhlAn4	superkingdom	Sum of abundances	mock	1.0
+MetaPhlAn4	phylum	Sum of abundances	mock	1.00000001
+MetaPhlAn4	class	Sum of abundances	mock	1.00000001
+MetaPhlAn4	order	Sum of abundances	mock	1.0
+MetaPhlAn4	family	Sum of abundances	mock	1.00000001
+MetaPhlAn4	genus	Sum of abundances	mock	1.00000001
+MetaPhlAn4	species	Sum of abundances	mock	1.00000001
+MetaPhlAn4	superkingdom	Taxon counts	mock	2.0
+MetaPhlAn4	phylum	Taxon counts	mock	3.0
+MetaPhlAn4	class	Taxon counts	mock	3.0
+MetaPhlAn4	order	Taxon counts	mock	5.0
+MetaPhlAn4	family	Taxon counts	mock	8.0
+MetaPhlAn4	genus	Taxon counts	mock	9.0
+MetaPhlAn4	species	Taxon counts	mock	9.0

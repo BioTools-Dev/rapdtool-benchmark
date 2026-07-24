@@ -1,0 +1,48 @@
+
+Reference genomes detected (mash screen):
+
+.-------------------------------+-------+----------+---------------.
+| Species                       | taxID | Identity | Shared-hashes |
++-------------------------------+-------+----------+---------------+
+| Limosilactobacillus fermentum | 1613  | 1.0000   | 1000/1000     |
+| Salmonella enterica           | 28901 | 1.0000   | 999/1000      |
+| Pseudomonas aeruginosa        | 287   | 0.9947   | 895/1000      |
+| Listeria monocytogenes        | 1639  | 0.9938   | 877/1000      |
+| Staphylococcus aureus         | 1280  | 0.9925   | 853/1000      |
+| Escherichia coli              | 562   | 0.9874   | 767/1000      |
+| Enterococcus faecalis         | 1351  | 0.9851   | 729/1000      |
+| Bacillus spizizenii           | 96241 | 0.9713   | 543/1000      |
+'-------------------------------+-------+----------+---------------'
+
+
+FOCUS profile
+Be cautious at species taxonomic level:
+.-------------------------------+--------------------.
+| Species                       | relative_abundance |
++-------------------------------+--------------------+
+| Salmonella_enterica           | 9.42               |
+| Pseudomonas_aeruginosa        | 9.22               |
+| Enterococcus_faecalis         | 6.60               |
+| Listeria_monocytogenes        | 6.00               |
+| Limosilactobacillus_fermentum | 5.78               |
+| Escherichia_whittamii         | 5.37               |
+| Bacillus_amyloliquefaciens    | 3.75               |
+| Shouchella_phoenicis          | 3.09               |
+| Salmonella_bongori            | 2.83               |
+| Aliibacillus_thermotolerans   | 2.55               |
+| Escherichia_albertii          | 2.29               |
+| Leptospira_cinconiae          | 2.19               |
+| Aliivibrio_kagoshimensis      | 1.99               |
+| Mesomycoplasma_lagogenitalium | 1.74               |
+| Lactobacillus_delbrueckii     | 1.72               |
+| Mediterraneibacter_torques    | 1.63               |
+| Vagococcus_salmoninarum       | 1.60               |
+| Chryseobacterium_arachidis    | 1.55               |
+| Blastopirellula_retiformator  | 1.53               |
+| Methanimicrococcus_stummii    | 1.51               |
+| Pantoea_piersonii             | 1.50               |
+| Oscillochloris_trichoides     | 1.43               |
+| Leuconostoc_gelidum           | 1.31               |
+| Shouchella_hunanensis         | 1.18               |
+| Ulvibacter_litoralis          | 1.10               |
+'-------------------------------+--------------------'

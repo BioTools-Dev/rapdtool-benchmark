@@ -1,0 +1,106 @@
+// benchmark_flow.dot — RaPDTool benchmark design.
+// Render:  dot -Tsvg benchmark_flow.dot -o figures/benchmark_flow.svg
+//          dot -Tpng -Gdpi=300 benchmark_flow.dot -o figures/benchmark_flow.png
+// Kept in sync with the mermaid diagram in benchmark_rationale.md §1.
+
+digraph benchmark {
+  rankdir=TB;
+  bgcolor="white";
+  compound=true;
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10,
+        fillcolor="#eef4f7", color="#9db8c6", penwidth=1.1, margin="0.14,0.09"];
+  edge [color="#7a8f9b", penwidth=1.1, arrowsize=0.7];
+  graph [fontname="Helvetica-Bold", fontsize=11, labeljust="l",
+         style="rounded", color="#c8d6de", penwidth=1.2];
+
+  // ---------------------------------------------------------------- PHASE 0
+  subgraph cluster_p0 {
+    label="  PHASE 0 · Database scope — no sequencing  ";
+    fontcolor="#1a4a5e";
+    census [label="check_representation.py\n30,209 type-material genomes\n× Kraken2 / MetaPhlAn4",
+            fillcolor="#dbe8ee"];
+    twoway [label="Two-way comparison\n6,503 species in BOTH\n60.5 % of type material absent from Kraken2\n84 % of Kraken2-only prokaryotes undescribed",
+            fillcolor="#2a6f8f", fontcolor="white", color="#1a4a5e"];
+    census -> twoway;
+  }
+
+  // ---------------------------------------------------------------- PHASE 1
+  subgraph cluster_p1 {
+    label="  PHASE 1 · Community design — stratified by phylum, seeded  ";
+    fontcolor="#1a4a5e";
+    ref   [label="10 REFERENCE\nfrom 10,116 present in both\n(positive control)"];
+    conf  [label="10 CONFLICTIVE\nfrom 3,640 absent from both\n(coverage experiment)"];
+    mirr  [label="10 MIRROR\nfrom 10,973 in Kraken2 only\n(out-of-domain failure mode)"];
+  }
+
+  // ---------------------------------------------------------------- PHASE 2
+  subgraph cluster_p2 {
+    label="  PHASE 2 · Data generation  ";
+    fontcolor="#1a4a5e";
+    vec   [label="make_abundance.py\nFIXED per-contig vector\n(iss --abundance is per-CONTIG:\nunusable with draft genomes)",
+           fillcolor="#dbe8ee"];
+    unev  [label="Uneven, 20× range\n3 M · 10 M · 30 M reads\ndepth is the only variable"];
+    eqcov [label="Equal coverage 38.8×\n30 M reads\ncoverage removed as a limit"];
+    mmock [label="Mirror mock\nequal coverage 37.5×\n15 M reads"];
+    asm   [label="InSilicoSeq → MEGAHIT\n+ mock_composition.tsv\n(gold standard)", fillcolor="#dbe8ee"];
+    vec -> unev; vec -> eqcov; vec -> mmock;
+    unev -> asm; eqcov -> asm; mmock -> asm;
+  }
+
+  // ------------------------------------------------------------ REAL DATA
+  zymo [label="ZymoBIOMICS (real Illumina)\nERR2984773 even · ERR2935805 log\nthird-party-defined community\nall 8 species in ALL three databases",
+        fillcolor="#dbe8ee", color="#2a6f8f", penwidth=1.6];
+
+  // ---------------------------------------------------------------- PHASE 3
+  subgraph cluster_p3 {
+    label="  PHASE 3 · Execution under measurement — /usr/bin/time -v  ";
+    fontcolor="#1a4a5e";
+    krak  [label="Kraken2 + Bracken\nstandard · 16 GB · 8 GB\nreads"];
+    mpa   [label="MetaPhlAn4\nreads"];
+    rscr  [label="RaPDTool screen\nreads — MATCHED INPUT"];
+    rful  [label="RaPDTool full\nassembly — genome recovery"];
+    res   [label="summary.csv · db_sizes.csv\npeak RSS · wall time · DB size", fillcolor="#dbe8ee"];
+    krak -> res; mpa -> res; rscr -> res; rful -> res;
+  }
+
+  // ---------------------------------------------------------------- PHASE 4
+  harm [label="PHASE 4 · profile2cami.py\nevery profile → CAMI/BIOBOXES\nONE pinned NCBI taxonomy\nsame SampleID for all",
+        fillcolor="#dbe8ee"];
+
+  // ---------------------------------------------------------------- PHASE 5
+  subgraph cluster_p5 {
+    label="  PHASE 5 · Evaluation  ";
+    fontcolor="#1a4a5e";
+    opal  [label="OPAL\nrecall · precision · F1\nL1 · Bray–Curtis · UniFrac\n+ threshold sweep 0 / 0.1 / 1 %"];
+    split [label="Detection split\nreference vs conflictive\n(the central experiment)"];
+    mico  [label="miComplete\nbin QUALITY\n(completeness / redundancy)"];
+    fail  [label="Failure mode\nabstain or misassign?\nKraken2 = positive control"];
+    amber [label="AMBER — bin CORRECTNESS\nNOT RUNNABLE:\nno contig→genome gold standard",
+           style="rounded,filled,dashed", fillcolor="#faf3e3", color="#b58b00",
+           fontcolor="#7a5c00"];
+  }
+
+  tables [label="results_table_template.md\nTables 1–7", fillcolor="#e8eff3",
+          color="#2a6f8f", penwidth=1.6];
+
+  // ------------------------------------------------------------- EDGES
+  twoway -> ref  [ltail=cluster_p0];
+  twoway -> conf;
+  twoway -> mirr;
+  ref  -> vec;
+  conf -> vec;
+  mirr -> vec;
+  asm  -> krak [lhead=cluster_p3];
+  zymo -> krak [lhead=cluster_p3, style=dashed];
+  res  -> tables;
+  krak -> harm; mpa -> harm; rscr -> harm; rful -> harm;
+  harm -> opal;
+  opal -> split;
+  rful -> mico  [constraint=false];
+  rful -> fail  [constraint=false];
+  rful -> amber [style=dashed, color="#b58b00",
+                 label="  gap", fontcolor="#7a5c00", fontsize=9];
+  opal -> tables; split -> tables; mico -> tables; fail -> tables;
+  twoway -> tables [style=dotted, constraint=false,
+                    label="  stands alone", fontsize=9, fontcolor="#1a4a5e"];
+}

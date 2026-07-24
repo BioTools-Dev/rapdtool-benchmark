@@ -1,0 +1,19 @@
+taxid	species	phylum	tier	mash_dist	identity_pct	nearest_ref
+1306159	Gracilibacillus sp. JCM 18860	Bacillota	A	0.0051	99.5	GCA_003176895.1
+3037258	Pantoea sp. X85	Pseudomonadota	A	0.0168	98.3	GCA_002858935.1
+1316411	Streptococcus sp. HSISS2	Bacillota	A	0.0304	97.0	GCA_030284685.1
+2903875	Streptomyces sp. NBC_01460	Actinomycetota	A	0.0915	90.9	GCA_000717245.1
+2866199	Bradyrhizobium sp. ISRA463	Pseudomonadota	A	0.0995	90.1	GCA_001542415.1
+3569461	Roseibium sp. M-1	Pseudomonadota	A	0.1823	81.8	GCA_026240905.1
+2815909	Annamia dubia	Cyanobacteriota	B	0.2438	75.6	GCA_041929275.1
+164514	Blattabacterium punctulatus	Bacteroidota	C	0.2438	75.6	GCA_003663945.1
+2953990	Wolbachia endosymbiont (group B) of Campaea margaritaria	Pseudomonadota	B	0.2630	73.7	GCA_000632845.1
+3066210	Wolbachia endosymbiont (group A) of Ophion ellenae	Pseudomonadota	B	0.2630	73.7	GCA_000013145.1
+3066200	Wolbachia endosymbiont (group A) of Gastracanthus pulcherrimus	Pseudomonadota	B	0.2630	73.7	GCA_000013145.1
+225322	Pasteuria ramosa	Bacillota	C	0.2630	73.7	GCA_001884105.1
+373994	Rivularia sp. PCC 7116	Cyanobacteriota	C	0.2630	73.7	GCA_016056275.1
+2601668	Candidatus Nesciobacter abundans	Pseudomonadota	B	0.2960	70.4	GCA_000012145.1
+3066143	Wolbachia endosymbiont (group A) of Conops quadrifasciatus	Pseudomonadota	B	0.2960	70.4	GCA_000013145.1
+2652803	Candidatus Azoamicus ciliaticola	Pseudomonadota	C	0.2960	70.4	GCA_000007365.1
+1903276	Candidatus Nitrosotalea okcheonensis	Nitrososphaerota	C	0.2960	70.4	GCA_000008365.1
+2045011	Candidatus Nitrosocaldus islandicus	Nitrososphaerota	C	0.2960	70.4	GCA_000012545.1

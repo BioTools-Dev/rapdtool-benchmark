@@ -1,0 +1,44 @@
+
+Reference genomes detected (mash screen):
+
+.----------------------------+---------+----------+---------------.
+| Species                    | taxID   | Identity | Shared-hashes |
++----------------------------+---------+----------+---------------+
+| Archaeoglobus profundus    | 84156   | 1.0000   | 1000/1000     |
+| Cryptobacterium curtum     | 84163   | 1.0000   | 1000/1000     |
+| Gracilibacillus dipsosauri | 178340  | 0.9953   | 905/1000      |
+| Pantoea leporis            | 2933780 | 0.9840   | 712/1000      |
+| Streptococcus raffinosi    | 3053355 | 0.9703   | 531/1000      |
+'----------------------------+---------+----------+---------------'
+
+
+FOCUS profile
+Be cautious at species taxonomic level:
+.-------------------------------+--------------------.
+| Species                       | relative_abundance |
++-------------------------------+--------------------+
+| Hymenobacter_baengnokdamensis | 5.99               |
+| Nostoc_favosum                | 5.93               |
+| Pantoea_leporis               | 5.28               |
+| Mastigocoleus_testarum        | 5.07               |
+| Gracilibacillus_dipsosauri    | 4.31               |
+| Streptomyces_clavifer         | 4.08               |
+| Bradyrhizobium_macuxiense     | 3.98               |
+| Streptomyces_pratensis        | 3.88               |
+| Nostoc_punctiforme            | 3.19               |
+| Bradyrhizobium_semiaridum     | 2.92               |
+| Exiguobacterium_acetylicum    | 2.84               |
+| Roseibium_sediminicola        | 2.72               |
+| Tolypothrix_tenuis            | 2.29               |
+| Archaeoglobus_profundus       | 2.24               |
+| Streptomyces_glycanivorans    | 2.13               |
+| Roseibium_algicola            | 2.02               |
+| Brunnivagina_elsteri          | 1.97               |
+| Cryptobacterium_curtum        | 1.92               |
+| Roseibium_aggregatum          | 1.79               |
+| Exiguobacterium_oxidotolerans | 1.39               |
+| Dulcicalothrix_desertica      | 1.20               |
+| Arminella_tumorigenes         | 1.19               |
+| Stanieria_cyanosphaera        | 1.13               |
+| Okeanomitos_corallinicola     | 1.04               |
+'-------------------------------+--------------------'

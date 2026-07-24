@@ -1,0 +1,381 @@
+tool	rank	metric	sample	value
+Gold standard	superkingdom	Bray-Curtis distance	mock	0.0
+Gold standard	phylum	Bray-Curtis distance	mock	0.0
+Gold standard	class	Bray-Curtis distance	mock	0.0
+Gold standard	order	Bray-Curtis distance	mock	0.0
+Gold standard	family	Bray-Curtis distance	mock	0.0
+Gold standard	genus	Bray-Curtis distance	mock	0.0
+Gold standard	species	Bray-Curtis distance	mock	0.0
+Gold standard	superkingdom	Shannon diversity	mock	0.0
+Gold standard	superkingdom	Shannon equitability	mock	0.0
+Gold standard	phylum	Shannon diversity	mock	0.6615632381579821
+Gold standard	phylum	Shannon equitability	mock	0.954434002924965
+Gold standard	class	Shannon diversity	mock	0.6615632381579821
+Gold standard	class	Shannon equitability	mock	0.954434002924965
+Gold standard	order	Shannon diversity	mock	1.3208883431493221
+Gold standard	order	Shannon equitability	mock	0.9528195311147832
+Gold standard	family	Shannon diversity	mock	1.9061547465398496
+Gold standard	family	Shannon equitability	mock	0.979569764547061
+Gold standard	genus	Shannon diversity	mock	2.0794415416798357
+Gold standard	genus	Shannon equitability	mock	1.0
+Gold standard	species	Shannon diversity	mock	2.0794415416798357
+Gold standard	species	Shannon equitability	mock	1.0
+Gold standard	superkingdom	True positives	mock	1.0
+Gold standard	superkingdom	False negatives	mock	0.0
+Gold standard	superkingdom	False positives	mock	0.0
+Gold standard	superkingdom	Completeness	mock	1.0
+Gold standard	superkingdom	Purity	mock	1.0
+Gold standard	superkingdom	F1 score	mock	1.0
+Gold standard	superkingdom	Jaccard index	mock	1.0
+Gold standard	phylum	True positives	mock	2.0
+Gold standard	phylum	False negatives	mock	0.0
+Gold standard	phylum	False positives	mock	0.0
+Gold standard	phylum	Completeness	mock	1.0
+Gold standard	phylum	Purity	mock	1.0
+Gold standard	phylum	F1 score	mock	1.0
+Gold standard	phylum	Jaccard index	mock	1.0
+Gold standard	class	True positives	mock	2.0
+Gold standard	class	False negatives	mock	0.0
+Gold standard	class	False positives	mock	0.0
+Gold standard	class	Completeness	mock	1.0
+Gold standard	class	Purity	mock	1.0
+Gold standard	class	F1 score	mock	1.0
+Gold standard	class	Jaccard index	mock	1.0
+Gold standard	order	True positives	mock	4.0
+Gold standard	order	False negatives	mock	0.0
+Gold standard	order	False positives	mock	0.0
+Gold standard	order	Completeness	mock	1.0
+Gold standard	order	Purity	mock	1.0
+Gold standard	order	F1 score	mock	1.0
+Gold standard	order	Jaccard index	mock	1.0
+Gold standard	family	True positives	mock	7.0
+Gold standard	family	False negatives	mock	0.0
+Gold standard	family	False positives	mock	0.0
+Gold standard	family	Completeness	mock	1.0
+Gold standard	family	Purity	mock	1.0
+Gold standard	family	F1 score	mock	1.0
+Gold standard	family	Jaccard index	mock	1.0
+Gold standard	genus	True positives	mock	8.0
+Gold standard	genus	False negatives	mock	0.0
+Gold standard	genus	False positives	mock	0.0
+Gold standard	genus	Completeness	mock	1.0
+Gold standard	genus	Purity	mock	1.0
+Gold standard	genus	F1 score	mock	1.0
+Gold standard	genus	Jaccard index	mock	1.0
+Gold standard	species	True positives	mock	8.0
+Gold standard	species	False negatives	mock	0.0
+Gold standard	species	False positives	mock	0.0
+Gold standard	species	Completeness	mock	1.0
+Gold standard	species	Purity	mock	1.0
+Gold standard	species	F1 score	mock	1.0
+Gold standard	species	Jaccard index	mock	1.0
+Gold standard	superkingdom	L1 norm error	mock	0.0
+Gold standard	phylum	L1 norm error	mock	0.0
+Gold standard	class	L1 norm error	mock	0.0
+Gold standard	order	L1 norm error	mock	0.0
+Gold standard	family	L1 norm error	mock	0.0
+Gold standard	genus	L1 norm error	mock	0.0
+Gold standard	species	L1 norm error	mock	0.0
+Gold standard	na	Weighted UniFrac error	mock	0.0
+Gold standard	na	Unweighted UniFrac error	mock	0.0
+Gold standard	na	Weighted UniFrac (CAMI)	mock	0.0
+Gold standard	na	Unweighted UniFrac (CAMI)	mock	0.0
+Gold standard	superkingdom	Sum of abundances	mock	1.0
+Gold standard	phylum	Sum of abundances	mock	1.0
+Gold standard	class	Sum of abundances	mock	1.0
+Gold standard	order	Sum of abundances	mock	1.0
+Gold standard	family	Sum of abundances	mock	1.0
+Gold standard	genus	Sum of abundances	mock	1.0
+Gold standard	species	Sum of abundances	mock	1.0
+Gold standard	superkingdom	Taxon counts	mock	1.0
+Gold standard	phylum	Taxon counts	mock	2.0
+Gold standard	class	Taxon counts	mock	2.0
+Gold standard	order	Taxon counts	mock	4.0
+Gold standard	family	Taxon counts	mock	7.0
+Gold standard	genus	Taxon counts	mock	8.0
+Gold standard	species	Taxon counts	mock	8.0
+RaPDTool_screen	superkingdom	Bray-Curtis distance	mock	0.034463839999999975
+RaPDTool_screen	phylum	Bray-Curtis distance	mock	0.21848278781517214
+RaPDTool_screen	class	Bray-Curtis distance	mock	0.23460230000000004
+RaPDTool_screen	order	Bray-Curtis distance	mock	0.29809140403817197
+RaPDTool_screen	family	Bray-Curtis distance	mock	0.3283082234338355
+RaPDTool_screen	genus	Bray-Curtis distance	mock	0.46325614073487736
+RaPDTool_screen	species	Bray-Curtis distance	mock	0.6216330256755046
+RaPDTool_screen	superkingdom	Shannon diversity	mock	0.149931877521174
+RaPDTool_screen	superkingdom	Shannon equitability	mock	0.2163059761709692
+RaPDTool_screen	phylum	Shannon diversity	mock	1.5698883034900328
+RaPDTool_screen	phylum	Shannon equitability	mock	0.5541016905004678
+RaPDTool_screen	class	Shannon diversity	mock	1.7156090050534167
+RaPDTool_screen	class	Shannon equitability	mock	0.5398300647618625
+RaPDTool_screen	order	Shannon diversity	mock	2.421649197694441
+RaPDTool_screen	order	Shannon equitability	mock	0.6811285859533986
+RaPDTool_screen	family	Shannon diversity	mock	2.8849455563195314
+RaPDTool_screen	family	Shannon equitability	mock	0.7578674400665342
+RaPDTool_screen	genus	Shannon diversity	mock	3.3911966228233075
+RaPDTool_screen	genus	Shannon equitability	mock	0.8185098595084485
+RaPDTool_screen	species	Shannon diversity	mock	3.6208679462390783
+RaPDTool_screen	species	Shannon equitability	mock	0.843934780390305
+RaPDTool_screen	superkingdom	True positives	mock	1.0
+RaPDTool_screen	superkingdom	False negatives	mock	0.0
+RaPDTool_screen	superkingdom	False positives	mock	1.0
+RaPDTool_screen	superkingdom	Completeness	mock	1.0
+RaPDTool_screen	superkingdom	Purity	mock	0.5
+RaPDTool_screen	superkingdom	F1 score	mock	0.6666666666666666
+RaPDTool_screen	superkingdom	Jaccard index	mock	0.5
+RaPDTool_screen	phylum	True positives	mock	2.0
+RaPDTool_screen	phylum	False negatives	mock	0.0
+RaPDTool_screen	phylum	False positives	mock	15.0
+RaPDTool_screen	phylum	Completeness	mock	1.0
+RaPDTool_screen	phylum	Purity	mock	0.11764705882352941
+RaPDTool_screen	phylum	F1 score	mock	0.21052631578947367
+RaPDTool_screen	phylum	Jaccard index	mock	0.11764705882352941
+RaPDTool_screen	class	True positives	mock	2.0
+RaPDTool_screen	class	False negatives	mock	0.0
+RaPDTool_screen	class	False positives	mock	22.0
+RaPDTool_screen	class	Completeness	mock	1.0
+RaPDTool_screen	class	Purity	mock	0.08333333333333333
+RaPDTool_screen	class	F1 score	mock	0.15384615384615385
+RaPDTool_screen	class	Jaccard index	mock	0.08333333333333333
+RaPDTool_screen	order	True positives	mock	4.0
+RaPDTool_screen	order	False negatives	mock	0.0
+RaPDTool_screen	order	False positives	mock	31.0
+RaPDTool_screen	order	Completeness	mock	1.0
+RaPDTool_screen	order	Purity	mock	0.11428571428571428
+RaPDTool_screen	order	F1 score	mock	0.20512820512820512
+RaPDTool_screen	order	Jaccard index	mock	0.11428571428571428
+RaPDTool_screen	family	True positives	mock	7.0
+RaPDTool_screen	family	False negatives	mock	0.0
+RaPDTool_screen	family	False positives	mock	38.0
+RaPDTool_screen	family	Completeness	mock	1.0
+RaPDTool_screen	family	Purity	mock	0.15555555555555556
+RaPDTool_screen	family	F1 score	mock	0.2692307692307693
+RaPDTool_screen	family	Jaccard index	mock	0.15555555555555556
+RaPDTool_screen	genus	True positives	mock	8.0
+RaPDTool_screen	genus	False negatives	mock	0.0
+RaPDTool_screen	genus	False positives	mock	55.0
+RaPDTool_screen	genus	Completeness	mock	1.0
+RaPDTool_screen	genus	Purity	mock	0.12698412698412698
+RaPDTool_screen	genus	F1 score	mock	0.22535211267605632
+RaPDTool_screen	genus	Jaccard index	mock	0.12698412698412698
+RaPDTool_screen	species	True positives	mock	6.0
+RaPDTool_screen	species	False negatives	mock	2.0
+RaPDTool_screen	species	False positives	mock	67.0
+RaPDTool_screen	species	Completeness	mock	0.75
+RaPDTool_screen	species	Purity	mock	0.0821917808219178
+RaPDTool_screen	species	F1 score	mock	0.14814814814814814
+RaPDTool_screen	species	Jaccard index	mock	0.08
+RaPDTool_screen	superkingdom	L1 norm error	mock	0.06892767999999995
+RaPDTool_screen	phylum	L1 norm error	mock	0.4369655799999999
+RaPDTool_screen	class	L1 norm error	mock	0.46920459999999997
+RaPDTool_screen	order	L1 norm error	mock	0.5961828200000001
+RaPDTool_screen	family	L1 norm error	mock	0.65661646
+RaPDTool_screen	genus	L1 norm error	mock	0.9265123000000002
+RaPDTool_screen	species	L1 norm error	mock	1.24326607
+RaPDTool_screen	na	Weighted UniFrac error	mock	0.03737786938666666
+RaPDTool_screen	na	Unweighted UniFrac error	mock	16.071851317465562
+RaPDTool_screen	na	Weighted UniFrac (CAMI)	mock	4.397675509999998
+RaPDTool_screen	na	Unweighted UniFrac (CAMI)	mock	779.8960660999999
+RaPDTool_screen	superkingdom	Sum of abundances	mock	1.0
+RaPDTool_screen	phylum	Sum of abundances	mock	1.0000000199999999
+RaPDTool_screen	class	Sum of abundances	mock	1.0
+RaPDTool_screen	order	Sum of abundances	mock	1.00000004
+RaPDTool_screen	family	Sum of abundances	mock	1.00000004
+RaPDTool_screen	genus	Sum of abundances	mock	1.00000004
+RaPDTool_screen	species	Sum of abundances	mock	1.00000003
+RaPDTool_screen	superkingdom	Taxon counts	mock	2.0
+RaPDTool_screen	phylum	Taxon counts	mock	17.0
+RaPDTool_screen	class	Taxon counts	mock	24.0
+RaPDTool_screen	order	Taxon counts	mock	35.0
+RaPDTool_screen	family	Taxon counts	mock	45.0
+RaPDTool_screen	genus	Taxon counts	mock	63.0
+RaPDTool_screen	species	Taxon counts	mock	73.0
+RaPDTool_full	superkingdom	Bray-Curtis distance	mock	0.03780407999999997
+RaPDTool_full	phylum	Bray-Curtis distance	mock	0.19906595599532975
+RaPDTool_full	class	Bray-Curtis distance	mock	0.20241059202410588
+RaPDTool_full	order	Bray-Curtis distance	mock	0.23064109769358904
+RaPDTool_full	family	Bray-Curtis distance	mock	0.34855498977167515
+RaPDTool_full	genus	Bray-Curtis distance	mock	0.4279699742796998
+RaPDTool_full	species	Bray-Curtis distance	mock	0.6204124224082483
+RaPDTool_full	superkingdom	Shannon diversity	mock	0.16090147606090044
+RaPDTool_full	superkingdom	Shannon equitability	mock	0.23213176158477533
+RaPDTool_full	phylum	Shannon diversity	mock	1.4607950386219093
+RaPDTool_full	phylum	Shannon equitability	mock	0.46588988466337444
+RaPDTool_full	class	Shannon diversity	mock	1.5065281187840374
+RaPDTool_full	class	Shannon equitability	mock	0.43086654105566413
+RaPDTool_full	order	Shannon diversity	mock	2.2775688489321904
+RaPDTool_full	order	Shannon equitability	mock	0.5852194280496169
+RaPDTool_full	family	Shannon diversity	mock	2.8142171901081854
+RaPDTool_full	family	Shannon equitability	mock	0.6766761973589255
+RaPDTool_full	genus	Shannon diversity	mock	3.4524303528886775
+RaPDTool_full	genus	Shannon equitability	mock	0.7563906626015795
+RaPDTool_full	species	Shannon diversity	mock	3.738461267842912
+RaPDTool_full	species	Shannon equitability	mock	0.7878850880702656
+RaPDTool_full	superkingdom	True positives	mock	1.0
+RaPDTool_full	superkingdom	False negatives	mock	0.0
+RaPDTool_full	superkingdom	False positives	mock	1.0
+RaPDTool_full	superkingdom	Completeness	mock	1.0
+RaPDTool_full	superkingdom	Purity	mock	0.5
+RaPDTool_full	superkingdom	F1 score	mock	0.6666666666666666
+RaPDTool_full	superkingdom	Jaccard index	mock	0.5
+RaPDTool_full	phylum	True positives	mock	2.0
+RaPDTool_full	phylum	False negatives	mock	0.0
+RaPDTool_full	phylum	False positives	mock	21.0
+RaPDTool_full	phylum	Completeness	mock	1.0
+RaPDTool_full	phylum	Purity	mock	0.08695652173913043
+RaPDTool_full	phylum	F1 score	mock	0.16
+RaPDTool_full	phylum	Jaccard index	mock	0.08695652173913043
+RaPDTool_full	class	True positives	mock	2.0
+RaPDTool_full	class	False negatives	mock	0.0
+RaPDTool_full	class	False positives	mock	31.0
+RaPDTool_full	class	Completeness	mock	1.0
+RaPDTool_full	class	Purity	mock	0.06060606060606061
+RaPDTool_full	class	F1 score	mock	0.1142857142857143
+RaPDTool_full	class	Jaccard index	mock	0.06060606060606061
+RaPDTool_full	order	True positives	mock	4.0
+RaPDTool_full	order	False negatives	mock	0.0
+RaPDTool_full	order	False positives	mock	45.0
+RaPDTool_full	order	Completeness	mock	1.0
+RaPDTool_full	order	Purity	mock	0.08163265306122448
+RaPDTool_full	order	F1 score	mock	0.15094339622641506
+RaPDTool_full	order	Jaccard index	mock	0.08163265306122448
+RaPDTool_full	family	True positives	mock	7.0
+RaPDTool_full	family	False negatives	mock	0.0
+RaPDTool_full	family	False positives	mock	57.0
+RaPDTool_full	family	Completeness	mock	1.0
+RaPDTool_full	family	Purity	mock	0.109375
+RaPDTool_full	family	F1 score	mock	0.19718309859154928
+RaPDTool_full	family	Jaccard index	mock	0.109375
+RaPDTool_full	genus	True positives	mock	8.0
+RaPDTool_full	genus	False negatives	mock	0.0
+RaPDTool_full	genus	False positives	mock	88.0
+RaPDTool_full	genus	Completeness	mock	1.0
+RaPDTool_full	genus	Purity	mock	0.08333333333333333
+RaPDTool_full	genus	F1 score	mock	0.15384615384615385
+RaPDTool_full	genus	Jaccard index	mock	0.08333333333333333
+RaPDTool_full	species	True positives	mock	7.0
+RaPDTool_full	species	False negatives	mock	1.0
+RaPDTool_full	species	False positives	mock	108.0
+RaPDTool_full	species	Completeness	mock	0.875
+RaPDTool_full	species	Purity	mock	0.06086956521739131
+RaPDTool_full	species	F1 score	mock	0.11382113821138212
+RaPDTool_full	species	Jaccard index	mock	0.0603448275862069
+RaPDTool_full	superkingdom	L1 norm error	mock	0.07560815999999994
+RaPDTool_full	phylum	L1 norm error	mock	0.39813191
+RaPDTool_full	class	L1 norm error	mock	0.40482117999999984
+RaPDTool_full	order	L1 norm error	mock	0.4612821999999999
+RaPDTool_full	family	L1 norm error	mock	0.6971099900000003
+RaPDTool_full	genus	L1 norm error	mock	0.8559399399999998
+RaPDTool_full	species	L1 norm error	mock	1.24082482
+RaPDTool_full	na	Weighted UniFrac error	mock	0.03460118568333331
+RaPDTool_full	na	Unweighted UniFrac error	mock	24.62709233419536
+RaPDTool_full	na	Weighted UniFrac (CAMI)	mock	4.1337182
+RaPDTool_full	na	Unweighted UniFrac (CAMI)	mock	1223.95945523
+RaPDTool_full	superkingdom	Sum of abundances	mock	1.0
+RaPDTool_full	phylum	Sum of abundances	mock	0.9999999900000001
+RaPDTool_full	class	Sum of abundances	mock	0.99999998
+RaPDTool_full	order	Sum of abundances	mock	1.00000002
+RaPDTool_full	family	Sum of abundances	mock	1.00000003
+RaPDTool_full	genus	Sum of abundances	mock	0.99999998
+RaPDTool_full	species	Sum of abundances	mock	0.9999999599999999
+RaPDTool_full	superkingdom	Taxon counts	mock	2.0
+RaPDTool_full	phylum	Taxon counts	mock	23.0
+RaPDTool_full	class	Taxon counts	mock	33.0
+RaPDTool_full	order	Taxon counts	mock	49.0
+RaPDTool_full	family	Taxon counts	mock	64.0
+RaPDTool_full	genus	Taxon counts	mock	96.0
+RaPDTool_full	species	Taxon counts	mock	115.0
+Kraken2_full	superkingdom	Bray-Curtis distance	mock	0.0007806600000000342
+Kraken2_full	phylum	Bray-Curtis distance	mock	0.05200026421999602
+Kraken2_full	class	Bray-Curtis distance	mock	0.05203455947965441
+Kraken2_full	order	Bray-Curtis distance	mock	0.05198294422025582
+Kraken2_full	family	Bray-Curtis distance	mock	0.052450618426481466
+Kraken2_full	genus	Bray-Curtis distance	mock	0.07510391324064783
+Kraken2_full	species	Bray-Curtis distance	mock	0.25735084676562753
+Kraken2_full	superkingdom	Shannon diversity	mock	0.006366267007346509
+Kraken2_full	superkingdom	Shannon equitability	mock	0.00918458184047383
+Kraken2_full	phylum	Shannon diversity	mock	0.6979581246712954
+Kraken2_full	phylum	Shannon equitability	mock	0.2910711458456526
+Kraken2_full	class	Shannon diversity	mock	0.7075083813592827
+Kraken2_full	class	Shannon equitability	mock	0.2680913269369668
+Kraken2_full	order	Shannon diversity	mock	1.3752536872313819
+Kraken2_full	order	Shannon equitability	mock	0.4272465798793878
+Kraken2_full	family	Shannon diversity	mock	1.9149695462991627
+Kraken2_full	family	Shannon equitability	mock	0.5343824266557917
+Kraken2_full	genus	Shannon diversity	mock	2.129214099806147
+Kraken2_full	genus	Shannon equitability	mock	0.4831744389270975
+Kraken2_full	species	Shannon diversity	mock	2.505279439188771
+Kraken2_full	species	Shannon equitability	mock	0.41411401968827966
+Kraken2_full	superkingdom	True positives	mock	1.0
+Kraken2_full	superkingdom	False negatives	mock	0.0
+Kraken2_full	superkingdom	False positives	mock	1.0
+Kraken2_full	superkingdom	Completeness	mock	1.0
+Kraken2_full	superkingdom	Purity	mock	0.5
+Kraken2_full	superkingdom	F1 score	mock	0.6666666666666666
+Kraken2_full	superkingdom	Jaccard index	mock	0.5
+Kraken2_full	phylum	True positives	mock	2.0
+Kraken2_full	phylum	False negatives	mock	0.0
+Kraken2_full	phylum	False positives	mock	9.0
+Kraken2_full	phylum	Completeness	mock	1.0
+Kraken2_full	phylum	Purity	mock	0.18181818181818182
+Kraken2_full	phylum	F1 score	mock	0.3076923076923077
+Kraken2_full	phylum	Jaccard index	mock	0.18181818181818182
+Kraken2_full	class	True positives	mock	2.0
+Kraken2_full	class	False negatives	mock	0.0
+Kraken2_full	class	False positives	mock	12.0
+Kraken2_full	class	Completeness	mock	1.0
+Kraken2_full	class	Purity	mock	0.14285714285714285
+Kraken2_full	class	F1 score	mock	0.25
+Kraken2_full	class	Jaccard index	mock	0.14285714285714285
+Kraken2_full	order	True positives	mock	4.0
+Kraken2_full	order	False negatives	mock	0.0
+Kraken2_full	order	False positives	mock	21.0
+Kraken2_full	order	Completeness	mock	1.0
+Kraken2_full	order	Purity	mock	0.16
+Kraken2_full	order	F1 score	mock	0.2758620689655173
+Kraken2_full	order	Jaccard index	mock	0.16
+Kraken2_full	family	True positives	mock	7.0
+Kraken2_full	family	False negatives	mock	0.0
+Kraken2_full	family	False positives	mock	29.0
+Kraken2_full	family	Completeness	mock	1.0
+Kraken2_full	family	Purity	mock	0.19444444444444445
+Kraken2_full	family	F1 score	mock	0.32558139534883723
+Kraken2_full	family	Jaccard index	mock	0.19444444444444445
+Kraken2_full	genus	True positives	mock	8.0
+Kraken2_full	genus	False negatives	mock	0.0
+Kraken2_full	genus	False positives	mock	74.0
+Kraken2_full	genus	Completeness	mock	1.0
+Kraken2_full	genus	Purity	mock	0.0975609756097561
+Kraken2_full	genus	F1 score	mock	0.17777777777777776
+Kraken2_full	genus	Jaccard index	mock	0.0975609756097561
+Kraken2_full	species	True positives	mock	8.0
+Kraken2_full	species	False negatives	mock	0.0
+Kraken2_full	species	False positives	mock	416.0
+Kraken2_full	species	Completeness	mock	1.0
+Kraken2_full	species	Purity	mock	0.018867924528301886
+Kraken2_full	species	F1 score	mock	0.037037037037037035
+Kraken2_full	species	Jaccard index	mock	0.018867924528301886
+Kraken2_full	superkingdom	L1 norm error	mock	0.0015613200000000685
+Kraken2_full	phylum	L1 norm error	mock	0.10400053
+Kraken2_full	class	L1 norm error	mock	0.10406912
+Kraken2_full	order	L1 norm error	mock	0.10396588999999999
+Kraken2_full	family	L1 norm error	mock	0.10490124000000002
+Kraken2_full	genus	L1 norm error	mock	0.15020784000000004
+Kraken2_full	species	L1 norm error	mock	0.5147019200000004
+Kraken2_full	na	Weighted UniFrac error	mock	0.008185888459166658
+Kraken2_full	na	Unweighted UniFrac error	mock	53.47462391077537
+Kraken2_full	na	Weighted UniFrac (CAMI)	mock	1.0835996533467094
+Kraken2_full	na	Unweighted UniFrac (CAMI)	mock	2966.999704989525
+Kraken2_full	superkingdom	Sum of abundances	mock	1.0
+Kraken2_full	phylum	Sum of abundances	mock	1.00000003
+Kraken2_full	class	Sum of abundances	mock	1.00000002
+Kraken2_full	order	Sum of abundances	mock	1.00000003
+Kraken2_full	family	Sum of abundances	mock	1.00000006
+Kraken2_full	genus	Sum of abundances	mock	1.00000018
+Kraken2_full	species	Sum of abundances	mock	1.00000088
+Kraken2_full	superkingdom	Taxon counts	mock	2.0
+Kraken2_full	phylum	Taxon counts	mock	11.0
+Kraken2_full	class	Taxon counts	mock	14.0
+Kraken2_full	order	Taxon counts	mock	25.0
+Kraken2_full	family	Taxon counts	mock	36.0
+Kraken2_full	genus	Taxon counts	mock	82.0
+Kraken2_full	species	Taxon counts	mock	424.0
