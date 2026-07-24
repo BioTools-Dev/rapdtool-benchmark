@@ -1,7 +1,7 @@
 // benchmark_flow.dot — RaPDTool benchmark design.
 // Render:  dot -Tsvg benchmark_flow.dot -o figures/benchmark_flow.svg
 //          dot -Tpng -Gdpi=300 benchmark_flow.dot -o figures/benchmark_flow.png
-// Kept in sync with the mermaid diagram in benchmark_rationale.md §1.
+// Embedded as figures/benchmark_flow.svg in benchmark_rationale.md §1 (no mermaid copy).
 
 digraph benchmark {
   rankdir=TB;
@@ -73,11 +73,13 @@ digraph benchmark {
     fontcolor="#1a4a5e";
     opal  [label="OPAL\nrecall · precision · F1\nL1 · Bray–Curtis · UniFrac\n+ threshold sweep 0 / 0.1 / 1 %"];
     split [label="Detection split\nreference vs conflictive\n(the central experiment)"];
-    mico  [label="miComplete\nbin QUALITY\n(completeness / redundancy)"];
+    mico  [label="miComplete / Bact105\nbin QUALITY (completeness / redundancy)\ncommon evaluator: RaPDTool + MetaWRAP bins"];
     fail  [label="Failure mode\nabstain or misassign?\nKraken2 = positive control"];
     amber [label="AMBER — bin CORRECTNESS\nNOT RUNNABLE:\nno contig→genome gold standard",
            style="rounded,filled,dashed", fillcolor="#faf3e3", color="#b58b00",
            fontcolor="#7a5c00"];
+    mwrap [label="MetaWRAP 1.3.0 — MAG recovery (Step 5d)\nsame assembly → metabat2 + maxbin2 + concoct + bin_refinement\ndedicated ensemble binner · parity, at 34.9 GB / 61 min",
+           fillcolor="#dbe8ee", color="#2a6f8f", penwidth=1.4];
   }
 
   tables [label="results_table_template.md\nTables 1–7", fillcolor="#e8eff3",
@@ -98,6 +100,8 @@ digraph benchmark {
   opal -> split;
   rful -> mico  [constraint=false];
   rful -> fail  [constraint=false];
+  asm   -> mwrap [style=dashed, label="  same assembly", fontsize=9, constraint=false];
+  mwrap -> mico  [constraint=false];
   rful -> amber [style=dashed, color="#b58b00",
                  label="  gap", fontcolor="#7a5c00", fontsize=9];
   opal -> tables; split -> tables; mico -> tables; fail -> tables;
