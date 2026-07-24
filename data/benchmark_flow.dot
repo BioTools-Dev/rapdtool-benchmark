@@ -28,9 +28,9 @@ digraph benchmark {
   subgraph cluster_p1 {
     label="  PHASE 1 · Community design — stratified by phylum, seeded  ";
     fontcolor="#1a4a5e";
-    ref   [label="10 REFERENCE\nfrom 10,116 present in both\n(positive control)"];
-    conf  [label="10 CONFLICTIVE\nfrom 3,640 absent from both\n(coverage experiment)"];
-    mirr  [label="10 MIRROR\nfrom 10,973 in Kraken2 only\n(out-of-domain failure mode)"];
+    ref   [label="10 REFERENCE\nfrom 11,552 present in both\n(positive control)"];
+    conf  [label="10 CONFLICTIVE\nfrom 3,423 absent from both\n(coverage experiment)"];
+    mirr  [label="14 DISTANCE-STRATIFIED\n100 % \u2192 ~70 % Mash identity to the DB\n(out-of-domain failure mode)"];
   }
 
   // ---------------------------------------------------------------- PHASE 2
@@ -41,7 +41,7 @@ digraph benchmark {
            fillcolor="#dbe8ee"];
     unev  [label="Uneven, 20× range\n3 M · 10 M · 30 M reads\ndepth is the only variable"];
     eqcov [label="Equal coverage 38.8×\n30 M reads\ncoverage removed as a limit"];
-    mmock [label="Mirror mock\nequal coverage 37.5×\n15 M reads"];
+    mmock [label="Mirror mock\nequal coverage 27.7×\n15 M reads"];
     asm   [label="InSilicoSeq → MEGAHIT\n+ mock_composition.tsv\n(gold standard)", fillcolor="#dbe8ee"];
     vec -> unev; vec -> eqcov; vec -> mmock;
     unev -> asm; eqcov -> asm; mmock -> asm;
