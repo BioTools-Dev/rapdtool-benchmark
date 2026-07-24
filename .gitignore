@@ -13,7 +13,7 @@ results/**/*.kraken
 results/**/*.bracken
 results/**/*.fastq
 results/**/*.fasta
-results/**/screen_reads*
+results/**/screen_reads*.fastq
 results/**/species_bins/
 mirror_db/
 *.zip
