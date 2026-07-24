@@ -263,6 +263,9 @@ What it does **not** do: check whether the bin was assigned to the right organis
 bin can be 98 % complete, 1 % redundant, and taxonomically mislabelled. miComplete
 measures *bin quality*, never *bin correctness*.
 
+The same miComplete/Bact105 run also re-scores MetaWRAP's bins, so the two pipelines'
+MAG recovery is compared on a single evaluator (§4d).
+
 ### AMBER — bin correctness · **currently a gap**
 
 AMBER evaluates binning against a **contig → source-genome truth table**: purity
