@@ -779,12 +779,14 @@ per-species FASTA) are the columns only RaPDTool fills — the core argument.
 |---|---|
 | Hardware | Intel Core i9-14900, 24 physical cores / 32 threads, 125 GB RAM, NVMe |
 | Threads | 16 |
+| RaPDTool | v2.3.0 (Apptainer SIF; bundles FOCUS, MetaBAT2, Binning_refiner, miComplete/Bact105, Mash, KronaTools) |
 | Kraken2 | 2.17.1 · DBs: standard / 16 GB / 8 GB, build 2026-06-26 |
 | Bracken | 3.0.1 |
 | MetaPhlAn | 4.2.5 · DB vJan26_CHOCOPhlAnSGB |
 | MEGAHIT | 1.2.9 |
 | InSilicoSeq | 2.0.1 |
 | OPAL | 1.0.14 |
+| MetaWRAP | 1.3.0 (biocontainer `metawrap-mg:1.3.0--hdfd78af_1`; bundles CheckM, DB `checkm_data_2015_01_16`) |
 | Taxonomy | NCBI taxdump 2026-07-10, sha256 `c1b91199…` (the dump the FOCUS DB was built from) |
 
 ## Known gaps
