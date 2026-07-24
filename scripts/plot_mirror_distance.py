@@ -65,7 +65,7 @@ def main():
     from matplotlib.patches import Rectangle
 
     rows = sorted(load(), key=lambda r: -r["id"])
-    fig, ax = plt.subplots(figsize=(9.5, 5.4))
+    fig, ax = plt.subplots(figsize=(9.5, 5.9))
 
     # Threshold bands (RaPDTool mash: species >95 %, genus 93-95 %).
     ax.add_patch(Rectangle((95, -0.5), 5.5, 3, color="#08519c", alpha=0.05, zorder=0))
@@ -81,9 +81,10 @@ def main():
                    edgecolor="white", linewidth=1.2)
 
     # Vertical labels so tight x-clusters (species 97-100 %, genus 90-95 %) don't
-    # overlap. Species row labels point up (into empty space above the top row); genus
-    # and abstain rows point down. Points sharing an identity get their labels nudged
-    # apart on x so the two don't print on top of each other.
+    # overlap. All rows label BELOW their point (consistent placement; keeps species
+    # labels clear of the threshold annotations above the top row). Points sharing an
+    # identity get their labels nudged apart on x so the two don't print on top of each
+    # other.
     import collections
     same = collections.defaultdict(list)
     for r in rows:
@@ -92,7 +93,7 @@ def main():
         grp.sort(key=lambda r: r["name"])
         for j, r in enumerate(grp):
             dx = 0.0 if len(grp) == 1 else (j - (len(grp) - 1) / 2) * 0.9
-            up = r["rank"] == "species"
+            up = False
             off = 0.22 if up else -0.22
             ax.annotate(r["name"], (r["id"], r["y"] + off), fontsize=6.8, color=INK,
                         ha="center", va="bottom" if up else "top", rotation=90,
@@ -115,12 +116,12 @@ def main():
     for s in ("left", "bottom"):
         ax.spines[s].set_color(GRID)
     ax.tick_params(colors=MUTED, labelsize=8.5, length=0)
-    fig.text(0.012, 0.01,
-             "14 genomes spanning genomic distance to RaPDTool's database, equal coverage "
-             "27.7×. No genome is assigned a confident species below the 95 % threshold; "
-             "organisms below ~80 % identity are not reported at all.",
-             fontsize=7.8, color=MUTED)
-    fig.tight_layout(rect=[0, 0.04, 1, 1])
+    fig.text(0.012, 0.02,
+             "14 genomes spanning genomic distance to RaPDTool's database, equal coverage 27.7×.\n"
+             "No genome is assigned a confident species below the 95 % threshold; organisms below "
+             "~80 % identity are not reported at all.",
+             fontsize=7.8, color=MUTED, linespacing=1.5)
+    fig.tight_layout(rect=[0, 0.085, 1, 1])
 
     os.makedirs("figures", exist_ok=True)
     for ext in ("svg", "png", "pdf"):
