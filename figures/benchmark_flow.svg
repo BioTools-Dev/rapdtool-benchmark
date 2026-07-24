@@ -45,11 +45,11 @@
 <!-- twoway -->
 <g id="node2" class="node">
 <title>twoway</title>
-<path fill="#2a6f8f" stroke="#1a4a5e" stroke-width="1.1" d="M350,-919C350,-919 150,-919 150,-919 144,-919 138,-913 138,-907 138,-907 138,-875 138,-875 138,-869 144,-863 150,-863 150,-863 350,-863 350,-863 356,-863 362,-869 362,-875 362,-875 362,-907 362,-907 362,-913 356,-919 350,-919"/>
+<path fill="#2a6f8f" stroke="#1a4a5e" stroke-width="1.1" d="M354,-919C354,-919 146,-919 146,-919 140,-919 134,-913 134,-907 134,-907 134,-875 134,-875 134,-869 140,-863 146,-863 146,-863 354,-863 354,-863 360,-863 366,-869 366,-875 366,-875 366,-907 366,-907 366,-913 360,-919 354,-919"/>
 <text text-anchor="middle" x="250" y="-905" font-family="Helvetica,sans-Serif" font-size="10.00" fill="white">Two&#45;way comparison</text>
-<text text-anchor="middle" x="250" y="-894" font-family="Helvetica,sans-Serif" font-size="10.00" fill="white">6,503 species in BOTH</text>
-<text text-anchor="middle" x="250" y="-883" font-family="Helvetica,sans-Serif" font-size="10.00" fill="white">60.5 % of type material absent from Kraken2</text>
-<text text-anchor="middle" x="250" y="-872" font-family="Helvetica,sans-Serif" font-size="10.00" fill="white">84 % of Kraken2&#45;only prokaryotes undescribed</text>
+<text text-anchor="middle" x="250" y="-894" font-family="Helvetica,sans-Serif" font-size="10.00" fill="white">7,836 species in BOTH</text>
+<text text-anchor="middle" x="250" y="-883" font-family="Helvetica,sans-Serif" font-size="10.00" fill="white">55.8 % of type material absent from Kraken2</text>
+<text text-anchor="middle" x="250" y="-872" font-family="Helvetica,sans-Serif" font-size="10.00" fill="white">95.5 % of Kraken2&#45;only prokaryotes undescribed</text>
 </g>
 <!-- census&#45;&gt;twoway -->
 <g id="edge1" class="edge">
@@ -109,7 +109,7 @@
 <!-- twoway&#45;&gt;tables -->
 <g id="edge36" class="edge">
 <title>twoway&#45;&gt;tables</title>
-<path fill="none" stroke="#7a8f9b" stroke-width="1.1" stroke-dasharray="1,5" d="M362.18,-878.35C417.08,-870.12 474.98,-856.76 492,-836 542.94,-773.86 444.51,-532.61 500,-474.5 537.69,-435.03 935.97,-448.7 990,-441 1177.8,-414.24 1229.52,-416.96 1407,-350 1502.12,-314.11 1555.43,-326.61 1607,-239 1646.23,-172.36 1659.53,-121.75 1607,-65 1572.4,-27.61 1239.3,-20.53 1087.6,-19.25"/>
+<path fill="none" stroke="#7a8f9b" stroke-width="1.1" stroke-dasharray="1,5" d="M366.15,-877.74C419.84,-869.47 475.39,-856.27 492,-836 542.94,-773.86 444.51,-532.61 500,-474.5 537.69,-435.03 935.97,-448.7 990,-441 1177.8,-414.24 1229.52,-416.96 1407,-350 1502.12,-314.11 1555.43,-326.61 1607,-239 1646.23,-172.36 1659.53,-121.75 1607,-65 1572.4,-27.61 1239.3,-20.53 1087.6,-19.25"/>
 <polygon fill="#7a8f9b" stroke="#7a8f9b" stroke-width="1.1" points="1087.53,-16.8 1080.52,-19.19 1087.5,-21.7 1087.53,-16.8"/>
 <text text-anchor="middle" x="671.5" y="-451.8" font-family="Times,serif" font-size="9.00" fill="#1a4a5e"> &#160;stands alone</text>
 </g>

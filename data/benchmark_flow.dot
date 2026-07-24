@@ -19,7 +19,7 @@ digraph benchmark {
     fontcolor="#1a4a5e";
     census [label="check_representation.py\n30,209 type-material genomes\n× Kraken2 / MetaPhlAn4",
             fillcolor="#dbe8ee"];
-    twoway [label="Two-way comparison\n6,503 species in BOTH\n60.5 % of type material absent from Kraken2\n84 % of Kraken2-only prokaryotes undescribed",
+    twoway [label="Two-way comparison\n7,836 species in BOTH\n55.8 % of type material absent from Kraken2\n95.5 % of Kraken2-only prokaryotes undescribed",
             fillcolor="#2a6f8f", fontcolor="white", color="#1a4a5e"];
     census -> twoway;
   }
