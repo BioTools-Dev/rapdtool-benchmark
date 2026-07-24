@@ -49,24 +49,36 @@ def main():
     data = {dk: load(dk) for dk, _ in DEPTHS}
     data["equalcov_30M"] = load("equalcov_30M")
 
-    fig, (axA, axB) = plt.subplots(1, 2, figsize=(11, 4.9))
+    fig, (axA, axB) = plt.subplots(1, 2, figsize=(11, 5.7))
+    fig.subplots_adjust(left=0.065, right=0.985, top=0.87, bottom=0.32, wspace=0.22)
 
     panels = [(axA, "Bray-Curtis distance", "Bray-Curtis distance", "lower is better", False),
               (axB, "F1 score", "F1 score (species)", "higher is better", True)]
     x = [d for _, d in DEPTHS]
+    # Equal-coverage control lives in its own x-slot to the right of the depth
+    # series, with a small per-tool horizontal dodge so overlapping values
+    # (e.g. the two RaPDTool variants at Bray-Curtis ~0.045) stay legible.
+    X_EQ = 56.0
+    DIV = 40.0                       # divider between depth series and EQ slot
+    dodge = {t: X_EQ * (1.085 ** (i - (len(ORDER) - 1) / 2.0))
+             for i, t in enumerate(ORDER)}
     for ax, metric, ylab, note, higher in panels:
         for t in ORDER:
             y = [data[dk][t][metric] for dk, _ in DEPTHS]
             ax.plot(x, y, "-o", color=COLORS[t], lw=1.8, ms=5, zorder=3)
-            # equal-coverage control as a hollow marker at x=30
-            yc = data["equalcov_30M"][t][metric]
-            ax.plot([30], [yc], marker="D", color=COLORS[t], ms=6, zorder=4,
-                    markerfacecolor="white", markeredgewidth=1.4)
+            # thin connector from the 30 M (uneven) point to the equal-coverage marker
+            yeq = data["equalcov_30M"][t][metric]
+            ax.plot([30, dodge[t]], [y[-1], yeq], "-", color=COLORS[t],
+                    lw=1.0, alpha=0.35, zorder=2)
+            ax.plot([dodge[t]], [yeq], marker="D", color=COLORS[t], ms=6.5,
+                    zorder=5, markeredgecolor="white", markeredgewidth=0.9)
+        ax.axvline(DIV, color=GRID, lw=0.9, ls=(0, (2, 2)), zorder=1)
         import matplotlib.ticker as mticker
         ax.set_xscale("log")
-        ax.set_xticks(x); ax.set_xticklabels(["3 M", "10 M", "30 M"])
+        ax.set_xticks(x + [X_EQ])
+        ax.set_xticklabels(["3 M", "10 M", "30 M", "30 M\nequal cov."])
         ax.xaxis.set_minor_locator(mticker.NullLocator())   # no 4×10⁰ clutter
-        ax.set_xlim(2.6, 34)
+        ax.set_xlim(2.6, 88)
         ax.set_xlabel("sequencing depth (read pairs ×2)", fontsize=9.5, color=MUTED)
         ax.set_ylabel(ylab, fontsize=9.5, color=MUTED)
         ax.set_title("%s  ·  %s" % (metric, note), fontsize=10.5, color=INK,
@@ -80,19 +92,22 @@ def main():
 
     handles = [Line2D([0], [0], color=COLORS[t], lw=2.4, marker="o", ms=5,
                       label=LABEL[t]) for t in ORDER]
-    handles.append(Line2D([0], [0], color=MUTED, lw=0, marker="D", ms=6,
-                          markerfacecolor="white", markeredgewidth=1.4,
+    handles.append(Line2D([0], [0], color=MUTED, lw=0, marker="D", ms=6.5,
+                          markeredgecolor="white", markeredgewidth=0.9,
                           label="equal-coverage control (30 M)"))
-    axB.legend(handles=handles, fontsize=7.6, frameon=False, loc="center right")
+    # Legend below the panels, outside the axes, so it never overlaps the data.
+    fig.legend(handles=handles, fontsize=8.2, frameon=False, loc="lower center",
+               ncol=4, bbox_to_anchor=(0.5, 0.105), columnspacing=1.6,
+               handletextpad=0.5)
 
     fig.suptitle("Profiling accuracy vs sequencing depth (OPAL, species rank)",
-                 fontsize=12.5, color=INK, x=0.045, ha="left", y=0.99, fontweight="bold")
-    fig.text(0.045, 0.005,
-             "Uneven community, fixed composition; depth is the only variable. RaPDTool "
-             "screen tracks the gold standard closely (Bray-Curtis ~0.05); MetaPhlAn wins "
-             "F1 through precision while recovering half the species. Unfiltered profiles.",
-             fontsize=7.8, color=MUTED)
-    fig.tight_layout(rect=[0, 0.04, 1, 0.96])
+                 fontsize=12.5, color=INK, x=0.045, ha="left", y=0.975, fontweight="bold")
+    fig.text(0.5, 0.02,
+             "Uneven community, fixed composition; depth is the only variable. "
+             "RaPDTool screen tracks the gold standard closely (Bray-Curtis ~0.05);\n"
+             "MetaPhlAn wins F1 through precision while recovering half the species. "
+             "Unfiltered profiles.",
+             fontsize=7.8, color=MUTED, ha="center", linespacing=1.5)
 
     os.makedirs("figures", exist_ok=True)
     for ext in ("svg", "png", "pdf"):
