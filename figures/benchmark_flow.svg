@@ -102,15 +102,15 @@
 <!-- tables -->
 <g id="node24" class="node">
 <title>tables</title>
-<path fill="#e8eff3" stroke="#2a6f8f" stroke-width="1.6" d="M1104.5,-36C1104.5,-36 993.5,-36 993.5,-36 987.5,-36 981.5,-30 981.5,-24 981.5,-24 981.5,-12 981.5,-12 981.5,-6 987.5,0 993.5,0 993.5,0 1104.5,0 1104.5,0 1110.5,0 1116.5,-6 1116.5,-12 1116.5,-12 1116.5,-24 1116.5,-24 1116.5,-30 1110.5,-36 1104.5,-36"/>
-<text text-anchor="middle" x="1049" y="-21" font-family="Helvetica,sans-Serif" font-size="10.00">results_table_template.md</text>
-<text text-anchor="middle" x="1049" y="-10" font-family="Helvetica,sans-Serif" font-size="10.00">Tables 1–7</text>
+<path fill="#e8eff3" stroke="#2a6f8f" stroke-width="1.6" d="M1099.5,-36C1099.5,-36 998.5,-36 998.5,-36 992.5,-36 986.5,-30 986.5,-24 986.5,-24 986.5,-12 986.5,-12 986.5,-6 992.5,0 998.5,0 998.5,0 1099.5,0 1099.5,0 1105.5,0 1111.5,-6 1111.5,-12 1111.5,-12 1111.5,-24 1111.5,-24 1111.5,-30 1105.5,-36 1099.5,-36"/>
+<text text-anchor="middle" x="1049" y="-21" font-family="Helvetica,sans-Serif" font-size="10.00">Results tables</text>
+<text text-anchor="middle" x="1049" y="-10" font-family="Helvetica,sans-Serif" font-size="10.00">(manuscript Tables 1–5)</text>
 </g>
 <!-- twoway&#45;&gt;tables -->
 <g id="edge36" class="edge">
 <title>twoway&#45;&gt;tables</title>
-<path fill="none" stroke="#7a8f9b" stroke-width="1.1" stroke-dasharray="1,5" d="M402.08,-882.09C468.7,-874.87 543.16,-861.27 564,-836 666.51,-711.66 426.01,-592.27 536,-474.5 573.25,-434.62 971.97,-448.7 1026,-441 1213.8,-414.24 1265.52,-416.96 1443,-350 1538.12,-314.11 1591.43,-326.61 1643,-239 1682.23,-172.36 1695.53,-121.75 1643,-65 1608.4,-27.61 1275.3,-20.53 1123.6,-19.25"/>
-<polygon fill="#7a8f9b" stroke="#7a8f9b" stroke-width="1.1" points="1123.53,-16.8 1116.52,-19.19 1123.5,-21.7 1123.53,-16.8"/>
+<path fill="none" stroke="#7a8f9b" stroke-width="1.1" stroke-dasharray="1,5" d="M402.08,-882.09C468.7,-874.87 543.16,-861.27 564,-836 666.51,-711.66 426.01,-592.27 536,-474.5 573.25,-434.62 971.97,-448.7 1026,-441 1213.8,-414.24 1265.52,-416.96 1443,-350 1538.12,-314.11 1591.43,-326.61 1643,-239 1682.23,-172.36 1695.53,-121.75 1643,-65 1608.04,-27.23 1268.45,-20.39 1119,-19.21"/>
+<polygon fill="#7a8f9b" stroke="#7a8f9b" stroke-width="1.1" points="1118.61,-16.76 1111.59,-19.15 1118.58,-21.66 1118.61,-16.76"/>
 <text text-anchor="middle" x="704.5" y="-451.8" font-family="Times,serif" font-size="9.00" fill="#1a4a5e"> &#160;stands alone</text>
 </g>
 <!-- vec -->
@@ -383,8 +383,8 @@
 <!-- res&#45;&gt;tables -->
 <g id="edge20" class="edge">
 <title>res&#45;&gt;tables</title>
-<path fill="none" stroke="#7a8f9b" stroke-width="1.1" d="M524.34,-275.96C509.17,-233.94 477.36,-124.46 532,-65 561.3,-33.12 837.98,-23.18 974.1,-20.21"/>
-<polygon fill="#7a8f9b" stroke="#7a8f9b" stroke-width="1.1" points="974.33,-22.65 981.27,-20.05 974.22,-17.75 974.33,-22.65"/>
+<path fill="none" stroke="#7a8f9b" stroke-width="1.1" d="M524.34,-275.96C509.17,-233.94 477.36,-124.46 532,-65 561.65,-32.73 844.74,-22.94 979,-20.1"/>
+<polygon fill="#7a8f9b" stroke="#7a8f9b" stroke-width="1.1" points="979.11,-22.55 986.06,-19.96 979.01,-17.65 979.11,-22.55"/>
 </g>
 <!-- opal -->
 <g id="node18" class="node">

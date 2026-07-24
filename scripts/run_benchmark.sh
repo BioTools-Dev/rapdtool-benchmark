@@ -313,6 +313,6 @@ NEXT (accuracy — run manually once profiles exist):
 
 3) MAG quality already in RaPDTool output (miComplete); cross-check with CheckM if desired.
 
-Fill results_table_template.md with the medians above + the OPAL/AMBER outputs.
+Fill the manuscript results tables (Tables 1–5) with the medians above + the OPAL/AMBER outputs.
 Do not fabricate any value.
 EOF

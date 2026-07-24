@@ -82,7 +82,7 @@ digraph benchmark {
            fillcolor="#dbe8ee", color="#2a6f8f", penwidth=1.4];
   }
 
-  tables [label="results_table_template.md\nTables 1–7", fillcolor="#e8eff3",
+  tables [label="Results tables\n(manuscript Tables 1–5)", fillcolor="#e8eff3",
           color="#2a6f8f", penwidth=1.6];
 
   // ------------------------------------------------------------- EDGES
