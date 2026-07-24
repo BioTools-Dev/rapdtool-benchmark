@@ -15,7 +15,7 @@ indicate if changes were made.
 
 > The RaPDTool authors. RaPDTool benchmark reproducibility kit.
 > https://github.com/BioTools-Dev/rapdtool-benchmark (archived at Zenodo,
-> DOI: to be assigned on acceptance).
+> DOI: 10.5281/zenodo.21528297).
 
 The software in this repository (everything under `scripts/`) is licensed
 separately under the MIT License; see `LICENSE`.

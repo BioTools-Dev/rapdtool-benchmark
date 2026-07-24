@@ -809,7 +809,7 @@ Dual-licensed by artifact type:
 ## Citing
 
 If you use this kit, please cite the accompanying publication and this repository
-(archived at Zenodo, DOI: to be assigned on acceptance):
+(archived at Zenodo, DOI: 10.5281/zenodo.21528297):
 
 > The RaPDTool authors. RaPDTool: type-material–anchored, genome-resolved
 > metagenomics on a laptop. *Bioinformatics* (under review). Benchmark kit:
