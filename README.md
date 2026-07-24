@@ -52,10 +52,20 @@ source config.sh
    needs only `$TAXONKIT_DB` (a pinned NCBI taxdump) for the taxid rollups:
    ```bash
    source config.sh
-   python3 scripts/plot_opal_depth.py            # -> figures/opal_depth.*
+   # the five figure scripts — each regenerates from the shipped result files alone:
+   python3 scripts/plot_census.py -i data/census_full.tsv -l data/mock_genomes.list \
+       -o figures/census                          # Fig 2  -> figures/census.*
+   python3 scripts/plot_opal_depth.py             # Fig 3  -> figures/opal_depth.*
+   python3 scripts/plot_micomplete.py             # Fig 4  -> figures/micomplete.*
+   python3 scripts/plot_mirror_distance.py        # Fig 5  -> figures/mirror_distance.*
+   python3 scripts/plot_f1_threshold.py           # threshold analysis -> figures/f1_threshold.*
+   # detection numbers (recall / precision / F1) from the mash confidence table:
    python3 scripts/mash_detection.py --bench results/bench_ln_30M \
        --gold results/bench_ln_30M/gold_standard.profile --split data/mock_genomes.list
    ```
+   (`scripts/threshold_sweep.py --truth <gold_standard.profile>` writes the
+   precision–recall sweep, `figures/threshold_sweep.*`; the flow diagram is rendered
+   from `data/benchmark_flow.dot` with `dot`.)
 2. **Full re-run from scratch.** Regenerate the simulated reads
    (`scripts/make_mock.sh … --seed 42`, from the shipped genome lists and abundance
    vectors), run the tools (`scripts/run_benchmark.sh`), and re-derive everything. This
