@@ -54,7 +54,7 @@ def main():
     import matplotlib.pyplot as plt
     from matplotlib.patches import Rectangle
 
-    fig, axes = plt.subplots(1, 2, figsize=(11, 5.0), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(11, 5.7), sharey=True)
     for ax, (ds, title) in zip(axes, DATASETS):
         rows = load(ds)
         ax.add_patch(Rectangle((90, -2), 15, 7, color=GOOD, alpha=0.06, zorder=0))
@@ -86,13 +86,13 @@ def main():
     fig.suptitle("Recovered-bin quality (miComplete) — most bins high-quality, "
                  "chimeras flagged by redundancy",
                  fontsize=12, color=INK, x=0.045, ha="left", y=0.99, fontweight="bold")
-    fig.text(0.045, 0.005,
-             "Green = high quality (shaded: ≥90 % complete, <5 % contamination). Red = "
-             "chimeric bins (≥10 % contamination), the same two organisms in both "
-             "datasets — a reproducible binning limitation, correctly flagged by the "
-             "redundancy metric. miComplete measures quality, not taxonomic correctness.",
-             fontsize=7.6, color=MUTED)
-    fig.tight_layout(rect=[0, 0.04, 1, 0.95])
+    fig.text(0.045, 0.015,
+             "Green = high quality (shaded: ≥90 % complete, <5 % contamination). "
+             "Red = chimeric bins (≥10 % contamination), the same two organisms in both datasets —\n"
+             "a reproducible binning limitation flagged by the redundancy metric. "
+             "miComplete measures bin quality, not taxonomic correctness.",
+             fontsize=7.8, color=MUTED, linespacing=1.5)
+    fig.tight_layout(rect=[0, 0.085, 1, 0.95])
 
     os.makedirs("figures", exist_ok=True)
     for ext in ("svg", "png", "pdf"):
