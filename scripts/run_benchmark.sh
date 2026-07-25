@@ -308,11 +308,15 @@ NEXT (accuracy — run manually once profiles exist):
    -> genus/species recall, precision, L1 norm, Bray-Curtis, weighted UniFrac.
    (profile2cami.py resolves taxonomy via taxonkit or ete3 per step 0; no other setup.)
 
-2) Bin accuracy (RaPDTool only; others produce no bins) vs CAMI binning gold standard:
-     amber.py -g gold_standard_binning.tsv rapdtool_binning.tsv -o $OUTDIR/amber
+2) Bin CORRECTNESS (AMBER) is NOT runnable on this mock -- do not go looking for the file.
+   AMBER needs a contig->genome truth table (gold_standard_binning.tsv) and make_mock.sh
+   produces only a composition gold standard (mock_composition.tsv). This is a documented
+   gap, not a missing step: see README Step 5 and benchmark_rationale.md section 3.
+   Consequence: report bin QUALITY only, and make no claim of binning accuracy.
 
 3) MAG quality already in RaPDTool output (miComplete); cross-check with CheckM if desired.
+   To compare against a dedicated binner on the same assembly, see scripts/run_metawrap.sh.
 
-Fill the manuscript results tables (Tables 1–5) with the medians above + the OPAL/AMBER outputs.
+Fill the manuscript results tables (Tables 1-5) with the medians above + the OPAL outputs.
 Do not fabricate any value.
 EOF
