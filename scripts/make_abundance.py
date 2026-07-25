@@ -29,6 +29,7 @@ Usage:
   ./make_abundance.py -l mock_genomes.list -o mock_abundance.txt --depths 3 10 30
 """
 import argparse
+import os
 import sys
 
 RL = 126  # iss hiseq model read length, for the coverage preview
@@ -54,7 +55,15 @@ def parse_list(path):
         if not code:
             continue
         label = comment.split("(")[0].strip() or code.split("/")[-1]
-        entries.append((code, label, group))
+        # The shipped lists write genome paths as ${FOCUS_DB}/db/GCA_x.fna so they are
+        # portable; expand them here the way make_mock.sh does, and fail loudly if the
+        # variable is unset rather than trying to open a literal '${FOCUS_DB}/...'.
+        path_ = os.path.expandvars(os.path.expanduser(code))
+        if "$" in path_:
+            sys.exit("ERROR: unexpanded variable in %s\n       %s\n"
+                     "       Did you 'source config.sh'? (see README, Configuration)"
+                     % (path, path_))
+        entries.append((path_, label, group))
     return entries
 
 

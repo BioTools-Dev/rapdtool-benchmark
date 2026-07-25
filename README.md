@@ -20,7 +20,7 @@ Steps 0 → 6 below and a reviewer can reproduce every number in the manuscript.
 
 ```
 rapdtool-benchmark/
-  *.md          docs (this README + rationale, methods, mock_design, results tables)
+  *.md          docs: README (how-to), benchmark_rationale (why), mock_design (the 20 genomes)
   scripts/      all analysis scripts (.py, .sh)
   data/         inputs: genome lists, abundance vectors, the census TSV, flow diagram
   results/      bench_<dataset>/ tool outputs, profiles, OPAL results
@@ -42,6 +42,21 @@ source config.sh
 ```
 
 `config.sh` is git-ignored; only the template is committed.
+
+**Start here — one command that checks the whole thing:**
+
+```bash
+source config.sh
+scripts/verify_kit.sh
+```
+
+It regenerates the five figures and compares them **byte-for-byte** against the
+committed PNGs, re-runs the threshold sweep and the detection numbers, and recomputes
+every census figure quoted in the manuscript — about two minutes, no large database
+required. You should see `20 passed, 0 failed`. Run it before anything else: it tells
+you whether your environment reproduces the study before you spend days on the full
+re-run. (If `$KRAKEN_STD_INSPECT` / `$MPA_PKL` / `$FOCUS_DB` are configured it also
+rebuilds the census from the databases themselves and diffs it against the shipped one.)
 
 **Two levels of reproduction:**
 
@@ -101,6 +116,7 @@ Large read/assembly data live outside the kit at `$MOCK_ROOT/mock_*` and `$ZYMO_
 | `threshold_sweep.py` / `figures/threshold_sweep.*` | precision–recall vs abundance cutoff (reads the CAMI profiles; picks the operating point) |
 | `plot_f1_threshold.py` / `figures/f1_threshold.*` | F1 vs a uniform abundance threshold — the MetaPhlAn crossover |
 | `plot_opal_depth.py` / `figures/opal_depth.*` | profiling accuracy (Bray–Curtis, F1) vs sequencing depth |
+| **`verify_kit.sh`** | **one-command check that this kit reproduces the published figures and numbers on your machine** (~2 min, no large DB needed) — run it first |
 | `config.sh.example` | template of external paths (databases, tools); copy to `config.sh` and edit |
 | `README.md`          | this file — the operational step-by-step |
 
@@ -251,6 +267,21 @@ Notes that will save you a debugging session:
   yours to begin with). `make_mock.sh` copies your vector into place so the gold
   standard still builds.
 - `-n` is **total reads**, not pairs: `-n 30000000` gives 15 M pairs.
+- **What is, and is not, bit-reproducible** — verified by regenerating `mock_ln_3M` from
+  this recipe and diffing it against the dataset the study used:
+  | Artefact | Reproducibility |
+  |---|---|
+  | `reads_R{1,2}.fastq` (InSilicoSeq, `--seed 42`) | **byte-identical** |
+  | `mock_composition.tsv` (gold standard) | **byte-identical** |
+  | `data/mock_abundance*.txt` (the vectors) | **byte-identical** |
+  | `data/census_full.tsv` (the census) | **byte-identical** |
+  | `asm/final.contigs.fasta` (MEGAHIT) | same contig count and total length; **34,670 of 34,710 contigs byte-identical (99.9 %)** — MEGAHIT's multithreaded local assembly is not deterministic, so ~0.1 % of contigs differ between runs |
+
+  Consequence: everything scored from **reads** (detection, the reference/conflictive
+  split, resource medians) reproduces exactly, while numbers scored from the
+  **assembly** (bin counts, miComplete completeness/redundancy) can shift marginally
+  between re-runs. That is expected and is a property of MEGAHIT, not of this kit — do
+  not chase a last-digit difference in a bin statistic.
 - `--seed` makes the read simulation reproducible for a given `-n` and `-b`.
 
 Database paths are passed as environment variables at run time (Step 1); the `CONFIG`
@@ -261,10 +292,12 @@ block in `run_benchmark.sh` holds only defaults, so you never edit the script.
 which reads each competitor DB's *own* taxonomy (no downloads) and reports, per
 genome species, presence in Kraken2 (full/16/8) and MetaPhlAn4. To reproduce it:
 
-1. **Confirm the DB paths** the script reads (hard-coded constants near the top of
-   `check_representation.py`): `KRAKEN` → `$KRAKEN_DB_FULL{,16,8}/inspect.txt`,
-   `MPA` → the MetaPhlAn `.pkl`, and `FOCUS` → `$FOCUS_DB`
-   (`acc_taxid_strain.tsv`, `taxid_lineage.tsv`, `db/`). Edit them if yours differ.
+1. **Confirm the DB paths** the script reads. They come from the environment — i.e.
+   from `config.sh`, nothing in the script needs editing: `KRAKEN_STD_INSPECT` /
+   `KRAKEN_16_INSPECT` / `KRAKEN_8_INSPECT` (each DB's `inspect.txt`), `MPA_PKL` (the
+   MetaPhlAn `.pkl`) and `FOCUS_DB` (holding `acc_taxid_strain.tsv`,
+   `taxid_lineage.tsv` and `db/`). If you did not `source config.sh`, the script
+   falls back to obvious `/path/to/...` placeholders and fails loudly.
 
 2. **Sample and classify** a pool of type-material genomes (deterministic via `--seed`):
    ```bash
@@ -328,9 +361,10 @@ The strongest result in the study and the cheapest to reproduce. It measures wha
 database *contains*, independently of any simulated community:
 
 ```bash
-conda activate rapdtool_bench
-scripts/check_representation.py --sample 30209 --seed 42 -o data/census_full.tsv   # ~3 min
-$BENCH_ENV_BIN/python scripts/plot_census.py \
+source config.sh                  # the script reads the DB paths from the environment
+conda activate rapdtool_bench     # (or put $BENCH_ENV_BIN first on PATH)
+scripts/check_representation.py --sample 30209 --seed 42 -o data/census_full.tsv   # ~30 s
+python3 scripts/plot_census.py \
     -i data/census_full.tsv -l data/mock_genomes.list -o figures/census
 ```
 
@@ -587,6 +621,7 @@ databases) cannot. **Never present the conflictive result without the census (St
 **Abundance-threshold analysis (context for the FOCUS profile, not detection):**
 
 ```bash
+B=results/bench_ln_30M     # define it here too — this block may be run in a fresh shell
 scripts/threshold_sweep.py  --truth $B/gold_standard.profile -o figures/threshold_sweep
 scripts/plot_f1_threshold.py                                  # -> figures/f1_threshold.*
 scripts/plot_opal_depth.py                                    # -> figures/opal_depth.*  (after all 4 datasets)
