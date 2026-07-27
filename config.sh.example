@@ -51,7 +51,23 @@ export MIRROR_FNA_DIR="${MIRROR_FNA_DIR:-/path/to/mirror_db/fna_dist}"  # datase
 export ZYMO_DIR="${ZYMO_DIR:-/path/to/ZymoBIOMICS_db}"    # ENA PRJEB29504 reads
 
 # --- tool launchers for run_benchmark.sh (see README Step 1) --------------------------
+# BENCH_ENV_BIN is the bin/ of the conda env from Getting started A — the directory
+# holding the COMPARED TOOLS' executables (kraken2, bracken, metaphlan, bowtie2, iss,
+# megahit, taxonkit). It is NOT this kit's scripts/ directory: the kit's own scripts
+# need no variable, you run them as `scripts/<name>` from the repository base.
+#   $ ls "$BENCH_ENV_BIN"/{kraken2,bracken,metaphlan,bowtie2}   # all four must exist
+# Typically: $HOME/miniconda3/envs/rapdtool_bench/bin  (`conda activate rapdtool_bench;
+# dirname $(which kraken2)` prints it).
+#
+# Why absolute rather than PATH: run_benchmark.sh measures peak RAM and wall time, so it
+# must pin exactly WHICH binary it measures. If a shell rc puts '.' or './bin' first,
+# resolution depends on the current directory and every tool exits 126/127 in ~0 s — the
+# matrix then completes with no data. Setting this also prepends the directory to PATH,
+# because MetaPhlAn shells out to its sibling bowtie2 and otherwise dies AFTER loading
+# ~7 GB, which looks like an unrelated failure.
 export BENCH_ENV_BIN="${BENCH_ENV_BIN:-/path/to/envs/rapdtool_bench/bin}"
+
+# The RaPDTool launcher itself (the wrapper script, not a directory).
 export RAPDTOOL="${RAPDTOOL:-/path/to/RaPDTool/scripts/rapdtool}"
 
 # --- MAG-recovery comparator (Step 5c; only for scripts/run_metawrap.sh) ---------------
