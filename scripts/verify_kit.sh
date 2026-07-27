@@ -21,11 +21,24 @@
 #   6. optional: the census is REBUILT from the competitor databases if they are
 #      configured (needs $KRAKEN_STD_INSPECT, $MPA_PKL, $FOCUS_DB); skipped otherwise
 #
-# Regenerated files are written to a scratch copy of figures/ and the repository is
-# left untouched, so this is safe to run on a clean checkout.
+# figures/ is backed up before the run and restored on exit, so a clean checkout stays
+# clean: verifying an artefact must not modify it. (The figure scripts hardcode figures/
+# as their output directory, hence the backup rather than a redirect. The PNGs would come
+# back byte-identical anyway, but SVG and PDF embed a creation date and would otherwise
+# leave the working tree dirty after every check.)
 set -uo pipefail
 cd "$(dirname "$0")/.."
 BASE="$PWD"
+
+# --- keep figures/ pristine: back it up now, put it back however we exit --------------
+TMPFIG=$(mktemp -d)
+cp -a figures/. "$TMPFIG/" 2>/dev/null || true
+restore_figures() {
+  [ -d "${TMPFIG:-}" ] || return 0
+  cp -a "$TMPFIG/." figures/ 2>/dev/null || true
+  rm -rf "$TMPFIG"
+}
+trap restore_figures EXIT
 
 PASS=0; FAIL=0; SKIP=0
 ok()   { printf '  \033[32mPASS\033[0m  %s\n' "$1"; PASS=$((PASS+1)); }
@@ -62,8 +75,6 @@ head_ "2. Figures regenerate identically (PNG, byte-for-byte)"
 if ! command -v git >/dev/null || ! git -C "$BASE" rev-parse HEAD >/dev/null 2>&1; then
   skip "not a git checkout — cannot compare against committed figures"
 else
-  TMPFIG=$(mktemp -d); trap 'rm -rf "$TMPFIG"' EXIT
-  cp -a figures/. "$TMPFIG/" 2>/dev/null || true
   LOG=$(mktemp)
   run_fig() {                       # $1 = label, $2 = repo-relative png, rest = command
     local label="$1" png="$2"; shift 2

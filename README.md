@@ -16,6 +16,53 @@ what each test measures, and an honest account of what is strong and what is mis
 read **`benchmark_rationale.md`** first. This file is the operational how-to: follow
 Steps 0 → 6 below and a reviewer can reproduce every number in the manuscript.
 
+## Get the kit
+
+```bash
+git clone https://github.com/BioTools-Dev/rapdtool-benchmark.git
+cd rapdtool-benchmark
+```
+
+Every command in this file is run from that directory. If you are reading this from the
+Zenodo archive or a supplementary ZIP instead, unpack it and `cd` into it — it is the
+same tree (the archive is a tagged snapshot of the repository).
+
+**Order of operations, starting cold:**
+
+| # | Do this | Section | Time |
+|---|---------|---------|------|
+| 1 | `git clone` | above | 1 min |
+| 2 | Install the tools (two conda envs) | Prerequisites → Getting started **A** | ~20 min |
+| 3 | `cp config.sh.example config.sh`, edit it, `source config.sh` | Configuration | ~10 min |
+| 4 | `scripts/verify_kit.sh` — reproduces every published figure and number | Configuration | ~2 min |
+| 5 | Download the databases, rebuild the reads, re-run every tool | Getting started **B–C** → Steps 0 → 6 | days |
+
+**Steps 1–4 are the reproduction most readers want**, and need no large database — only
+a taxonomy dump. Step 5 re-derives everything from raw reads and needs ~300 GB of
+reference data.
+
+### What the clone already contains — and why that is the point
+
+The clone ships the **published figures** and the **small summary result files**. That is
+deliberate: they are the reference outputs — the answer key your own run is checked
+against, not a shortcut around it. `scripts/verify_kit.sh` regenerates each figure from
+the shipped inputs and compares it **byte-for-byte** against the committed PNG. Without a
+committed copy to diff against, a regenerated figure would just be a picture, with no way
+to tell whether it is the right one. (PNG carries no timestamp, so an exact byte match is
+strong evidence of an exact reproduction; SVG and PDF embed a creation date and are
+therefore not byte-comparable.)
+
+| Shipped in the clone | You regenerate |
+|---|---|
+| `figures/` — the five manuscript figures | simulated reads (~36 GB) and MEGAHIT assemblies |
+| `results/*/` — CAMI profiles, OPAL `results.tsv`, `summary.csv`, mash confidence and miComplete tables | raw Kraken2 / Bracken / MetaPhlAn output |
+| `data/` — genome lists, abundance vectors, the 30,209-genome census | the reference databases (~300 GB, Getting started **B**) |
+
+Nothing you are asked to reproduce is handed to you in a way that could hide a failure:
+you rebuild the artefact and the kit tells you whether your bytes match. **Overwriting the
+committed figures is expected** — `git diff --stat` after a run is itself a result. To put
+them back: `git checkout -- figures/`.
+
 ## Directory layout
 
 ```
@@ -41,7 +88,20 @@ cp config.sh.example config.sh     # then edit config.sh with your paths
 source config.sh
 ```
 
-`config.sh` is git-ignored; only the template is committed.
+`config.sh` is git-ignored; only the template is committed, and every variable in it is
+commented with what reads it and when.
+
+**You do not have to fill in all of them to get started.** For the figure-and-number
+reproduction (`verify_kit.sh`, and level 1 below) the only variable that must be real is
+**`TAXONKIT_DB`**, a local NCBI taxdump — everything else can keep its placeholder until
+you attempt the full re-run:
+
+```bash
+# minimum viable config: a pinned NCBI taxonomy dump (~450 MB)
+mkdir -p ~/taxonkit_db && cd ~/taxonkit_db
+wget https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump_archive/taxdmp_2026-07-10.zip
+unzip -o taxdmp_2026-07-10.zip     # then set TAXONKIT_DB=~/taxonkit_db in config.sh
+```
 
 **Start here — one command that checks the whole thing:**
 
@@ -53,10 +113,23 @@ scripts/verify_kit.sh
 It regenerates the five figures and compares them **byte-for-byte** against the
 committed PNGs, re-runs the threshold sweep and the detection numbers, and recomputes
 every census figure quoted in the manuscript — about two minutes, no large database
-required. You should see `20 passed, 0 failed`. Run it before anything else: it tells
-you whether your environment reproduces the study before you spend days on the full
-re-run. (If `$KRAKEN_STD_INSPECT` / `$MPA_PKL` / `$FOCUS_DB` are configured it also
-rebuilds the census from the databases themselves and diffs it against the shipped one.)
+required. Run it before anything else: it tells you whether your environment reproduces
+the study before you spend days on the full re-run.
+
+Expected output with only `TAXONKIT_DB` set:
+**`19 passed, 0 failed, 1 skipped`** — the skip is the optional census rebuild, which
+needs the competitor databases. Once `$KRAKEN_STD_INSPECT` / `$MPA_PKL` / `$FOCUS_DB`
+are also configured it rebuilds the census from those databases and diffs it against the
+shipped one, and you get **`20 passed, 0 failed, 0 skipped`**.
+
+`figures/` is backed up and restored, so the check leaves a clean checkout clean —
+`git status` after it should show nothing.
+
+> **Byte-identical PNGs require the same matplotlib.** This study used **matplotlib
+> 3.11.0** on Python 3.13. A different version usually renders a visually identical
+> figure whose bytes differ, which shows up as a section-2 `FAIL` while every number in
+> sections 3–5 still passes. That combination means *your numbers reproduce and your
+> renderer differs* — not a failure to reproduce the study.
 
 **Two levels of reproduction:**
 
@@ -144,6 +217,8 @@ outside the intended domain (mirror), and external validity (Zymo). See
 
 ## Prerequisites
 
+- Python 3 with **matplotlib 3.11.0** — every figure script, and the byte-for-byte
+  figure check in `verify_kit.sh`, depends on the renderer version.
 - The tools you compare, reachable by **absolute path** (see the warning in Step 1 —
   do not rely on `PATH`): `rapdtool`, `kraken2`, `bracken`, `metaphlan` (and/or
   `motus`); GNU `/usr/bin/time`.
@@ -165,9 +240,10 @@ outside the intended domain (mirror), and external validity (Zymo). See
 dedicated conda env:
 
 ```bash
-# Tools env (any recent Python is fine here)
+# Tools env (any recent Python is fine here; the study used 3.13)
+# matplotlib is pinned because the figure check compares PNGs byte-for-byte.
 conda create -n rapdtool_bench -c conda-forge -c bioconda \
-    kraken2 bracken metaphlan insilicoseq megahit taxonkit -y
+    kraken2 bracken metaphlan insilicoseq megahit taxonkit matplotlib=3.11.0 -y
 conda activate rapdtool_bench
 # RaPDTool runs via its launcher wrapper; if `rapdtool` is not on PATH in this env,
 # pass its absolute path as RAPDTOOL=... in Step 1 (e.g. .../RaPDTool/scripts/rapdtool)
