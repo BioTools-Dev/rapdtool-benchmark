@@ -174,7 +174,20 @@ if [ -r "${KRAKEN_STD_INSPECT:-/nonexistent}" ] && [ -r "${MPA_PKL:-/nonexistent
   fi
   rm -f "$TMPC"
 else
-  skip "competitor databases not configured (KRAKEN_STD_INSPECT / MPA_PKL / FOCUS_DB) — census verified from the shipped TSV only"
+  # Name the variable that actually failed and show its value. A blanket "not
+  # configured" is misleading when config.sh IS set: the usual cause is a stale value
+  # left in the shell, which wins if config.sh uses ${VAR:-default} (this kit's template
+  # assigns unconditionally for exactly that reason).
+  skip "census not rebuilt from the databases — checked from the shipped TSV only. Because:"
+  [ -r "${KRAKEN_STD_INSPECT:-/nonexistent}" ] \
+    || printf '          KRAKEN_STD_INSPECT not readable: [%s]\n' "${KRAKEN_STD_INSPECT:-<unset>}"
+  [ -r "${MPA_PKL:-/nonexistent}" ] \
+    || printf '          MPA_PKL not readable:            [%s]\n' "${MPA_PKL:-<unset>}"
+  [ -d "${FOCUS_DB:-/nonexistent}" ] \
+    || printf '          FOCUS_DB not a directory:        [%s]\n' "${FOCUS_DB:-<unset>}"
+  printf '          (expected if you have not downloaded the competitor databases.\n'
+  printf '           If your config.sh does name them, the value above came from your\n'
+  printf '           shell, not the file — open a new shell and source config.sh again.)\n'
 fi
 
 # ------------------------------------------------------------------------- summary

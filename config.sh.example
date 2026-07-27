@@ -9,28 +9,42 @@
 #
 # config.sh is git-ignored; only this template is committed. Every variable is read by
 # the scripts via the environment, so nothing else needs editing.
+#
+# NOTE ON THE ASSIGNMENTS BELOW. They are plain `export VAR=value`, deliberately not
+# `export VAR="${VAR:-value}"`. The defensive form lets a value already sitting in your
+# shell silently override this file, so two people with an identical config.sh can
+# benchmark against different databases with no warning — the failure mode is a complete
+# run that produces plausible, wrong numbers. Here the file wins: source it and you know
+# what you are pointing at. Editing and re-sourcing therefore always takes effect, and no
+# `unset` is ever needed. To override one path for a single run, put it on the command
+# line, which still takes precedence:
+#
+#   KRAKEN_DB_FULL=/other/db scripts/run_benchmark.sh …
+#
+# Keep the `:-` out when you edit: `${VAR:value}` (a missing dash) is not a default at
+# all — it expands to the empty string, in both bash and zsh, without an error.
 
 # --- taxonomy (needed by every rollup: census, detection, profile→CAMI) --------------
 # NCBI taxdump directory for taxonkit. Pin a dated dump for reproducibility; the study
 # used the 2026-07-10 dump (SHA-256 c1b91199…). Download:
 #   https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump_archive/taxdmp_<YYYY-MM-DD>.zip
-export TAXONKIT_DB="${TAXONKIT_DB:-/path/to/taxonkit_dump}"
+export TAXONKIT_DB=/path/to/taxonkit_dump
 
 # --- RaPDTool reference set (only for the census / mirror-selection scripts) ----------
 # Directory holding acc_taxid_strain.tsv, taxid_lineage.tsv and db/ (the type-material
 # genomes). And the mash sketch DB (0726_30213genomes.msh) used by the mirror-distance
 # selection.
-export FOCUS_DB="${FOCUS_DB:-/path/to/focus_build}"
-export MASH_DB="${MASH_DB:-/path/to/0726_30213genomes.msh}"
-export MASH_BIN="${MASH_BIN:-mash}"                 # mash executable (on PATH is fine)
+export FOCUS_DB=/path/to/focus_build
+export MASH_DB=/path/to/0726_30213genomes.msh
+export MASH_BIN=mash                 # mash executable (on PATH is fine)
 
 # --- competitor databases (only for the census and the full benchmark re-run) --------
 # Give the DATABASE DIRECTORIES; everything else is derived from them.
-export KRAKEN_STD_DB="${KRAKEN_STD_DB:-/path/to/kraken2_db/standard}"
-export KRAKEN_16_DB="${KRAKEN_16_DB:-/path/to/kraken2_db/standard16}"
-export KRAKEN_8_DB="${KRAKEN_8_DB:-/path/to/kraken2_db/standard8}"
-export MPA_DB="${MPA_DB:-/path/to/metaphlan_db}"
-export MPA_PKL_NAME="${MPA_PKL_NAME:-mpa_vJan26_CHOCOPhlAnSGB_202605.pkl}"
+export KRAKEN_STD_DB=/path/to/kraken2_db/standard
+export KRAKEN_16_DB=/path/to/kraken2_db/standard16
+export KRAKEN_8_DB=/path/to/kraken2_db/standard8
+export MPA_DB=/path/to/metaphlan_db
+export MPA_PKL_NAME=mpa_vJan26_CHOCOPhlAnSGB_202605.pkl
 # derived — the census scripts read the inspect.txt / .pkl files:
 export KRAKEN_STD_INSPECT="$KRAKEN_STD_DB/inspect.txt"
 export KRAKEN_16_INSPECT="$KRAKEN_16_DB/inspect.txt"
@@ -42,13 +56,13 @@ export KRAKEN_DB_CAP16="$KRAKEN_16_DB"
 export KRAKEN_DB_CAP8="$KRAKEN_8_DB"
 
 # --- OPAL (accuracy step; installed in a separate Python 3.11 env — see README) -------
-export OPAL_PY="${OPAL_PY:-/path/to/envs/opal/bin/python}"
-export OPAL_BIN="${OPAL_BIN:-/path/to/envs/opal/bin/opal.py}"
+export OPAL_PY=/path/to/envs/opal/bin/python
+export OPAL_BIN=/path/to/envs/opal/bin/opal.py
 
 # --- where simulated read datasets live (regenerate with make_mock.sh --seed 42) ------
-export MOCK_ROOT="${MOCK_ROOT:-/path/to/mock_datasets}"       # holds mock_<name>/
-export MIRROR_FNA_DIR="${MIRROR_FNA_DIR:-/path/to/mirror_db/fna_dist}"  # datasets download dir
-export ZYMO_DIR="${ZYMO_DIR:-/path/to/ZymoBIOMICS_db}"    # ENA PRJEB29504 reads
+export MOCK_ROOT=/path/to/mock_datasets       # holds mock_<name>/
+export MIRROR_FNA_DIR=/path/to/mirror_db/fna_dist  # datasets download dir
+export ZYMO_DIR=/path/to/ZymoBIOMICS_db    # ENA PRJEB29504 reads
 
 # --- tool launchers for run_benchmark.sh (see README Step 1) --------------------------
 # BENCH_ENV_BIN is the bin/ of the conda env from Getting started A — the directory
@@ -65,16 +79,16 @@ export ZYMO_DIR="${ZYMO_DIR:-/path/to/ZymoBIOMICS_db}"    # ENA PRJEB29504 reads
 # matrix then completes with no data. Setting this also prepends the directory to PATH,
 # because MetaPhlAn shells out to its sibling bowtie2 and otherwise dies AFTER loading
 # ~7 GB, which looks like an unrelated failure.
-export BENCH_ENV_BIN="${BENCH_ENV_BIN:-/path/to/envs/rapdtool_bench/bin}"
+export BENCH_ENV_BIN=/path/to/envs/rapdtool_bench/bin
 
 # The RaPDTool launcher itself (the wrapper script, not a directory).
-export RAPDTOOL="${RAPDTOOL:-/path/to/RaPDTool/scripts/rapdtool}"
+export RAPDTOOL=/path/to/RaPDTool/scripts/rapdtool
 
 # --- MAG-recovery comparator (Step 5c; only for scripts/run_metawrap.sh) ---------------
 # MetaWRAP + CheckM run from a biocontainer; the common-evaluator miComplete re-scoring
 # runs inside RaPDTool's own SIF (so both bin sets are scored with the same tool).
 #   apptainer pull docker://quay.io/biocontainers/metawrap-mg:1.3.0--hdfd78af_1
 #   CheckM DB: https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
-export METAWRAP_SIF="${METAWRAP_SIF:-/path/to/metawrap.sif}"        # metawrap-mg 1.3.0 biocontainer
-export CHECKM_DB="${CHECKM_DB:-/path/to/checkm_db}"                 # checkm_data_2015_01_16 (1.4 GB)
-export RAPDTOOL_SIF="${RAPDTOOL_SIF:-/path/to/rapdtool_v2.3.0.sif}" # provides miComplete for re-scoring
+export METAWRAP_SIF=/path/to/metawrap.sif        # metawrap-mg 1.3.0 biocontainer
+export CHECKM_DB=/path/to/checkm_db                 # checkm_data_2015_01_16 (1.4 GB)
+export RAPDTOOL_SIF=/path/to/rapdtool_v2.3.0.sif # provides miComplete for re-scoring
