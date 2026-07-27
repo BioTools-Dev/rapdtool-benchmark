@@ -115,30 +115,27 @@ genomes in phyla **not** already present in the conflictive set.
 > a within-genus illustration that Kraken/MetaPhlAn would collapse the novel species
 > to the genus while RaPDTool separates it. Likewise rows 4 & 11 (Actinomycetota).
 
-## Honesty notes (write these into the paper, don't hide them)
+## How to read this design
 
-- **State the limitation in one explicit sentence, before a reviewer does:** *the
-  conflictive taxa come from RaPDTool's own curated database, so their detection is
-  expected by construction; the experiment demonstrates database coverage of type
-  material, not algorithmic superiority.* With the census above, that sentence costs
-  nothing and buys credibility — the claim being made is about database design, and
-  a coverage gap cannot be measured with taxa that are present in every database.
-- The reference half is the control: all tools should detect it, and at adequate depth
-  RaPDTool does — **10/10 reference at 3/10/30 M** (OPAL, `mock_ln_*`). An earlier
-  "RaPDTool loses on the reference half, 5/10" note came from the pathological 2 M mock
-  (one genome held 61 % of reads, starving the rest) and **is superseded** — do not
-  repeat it. The credibility of the conflictive result now rests on the census and the
-  symmetric mirror experiment, not on a reference-half loss.
-- The conflictive genomes come from RaPDTool's own curated DB — **that is the point**
-  (a small type-material DB covers taxa the big general DBs miss), not a trick. State
-  it plainly: the advantage is *curation for type material*, not a larger index.
-- `make_mock.sh` simulates reads (InSilicoSeq) and **re-assembles** (MegaHit), so
-  RaPDTool classifies reconstructed contigs, not the reference file it was built from
-  — this blunts the "it's literally its own input" objection but does not remove that
-  these organisms are in its DB.
-- Complement with an **external CAMI II dataset** (organisms RaPDTool did *not*
-  curate) for the fair-fight accuracy claim; use this in-house mock for the
-  footprint + novel-taxon capability claims.
+- **What the conflictive half establishes.** These taxa come from RaPDTool's own
+  curated database, so their detection is expected by construction. The experiment
+  therefore measures **database coverage of type material**, not algorithmic
+  superiority — which is the claim being made, and the census above is what gives that
+  claim a population. A coverage gap cannot be measured with taxa that are present in
+  every database.
+- **The reference half is the control.** All tools should detect it, and at adequate
+  depth RaPDTool does: **10/10 reference at 3, 10 and 30 M reads** (OPAL, `mock_ln_*`).
+  Reporting the condition in which RaPDTool holds no database advantage is what makes
+  the conflictive result interpretable.
+- **The property under test is curation, not index size.** A 0.5 GB type-material
+  reference covers species the large general databases omit; §4c of
+  `benchmark_rationale.md` reports that comparison in both directions.
+- **RaPDTool classifies reconstructed contigs, not its own reference files.**
+  `make_mock.sh` simulates reads with InSilicoSeq and re-assembles them with MEGAHIT,
+  so the input is an assembly of simulated sequencing data — while the organisms
+  themselves are, by design, present in the database.
+- **Independent validation** comes from the ZymoBIOMICS even community (§5b), a
+  third-party standard with published composition, run through the same pipeline.
 
 ## Reproduce
 

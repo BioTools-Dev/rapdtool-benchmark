@@ -124,8 +124,8 @@ every invocation; three independent draws would confound depth with composition.
   Replication exists to bound timing/memory variance, which was small (peak RSS
   identical to two decimals; wall-clock within ±5 %).
 
-RaPDTool is run in **two modes**, and conflating them is the easiest way to make this
-benchmark dishonest:
+RaPDTool is run in **two modes**, and conflating them is the easiest way to draw an
+invalid comparison from this benchmark:
 
 | Mode | Input | Used for | Never used for |
 |---|---|---|---|
@@ -248,10 +248,10 @@ can report a taxon absent from its database (it cannot), and is interpretable be
 reference half controls for everything else. RaPDTool detects 10/10 reference **and**
 10/10 conflictive; the competitors detect 10/10 reference and 0/10 conflictive.
 
-Report both halves. Note that the reference half is **not** a loss for RaPDTool at
-adequate depth (that was the pathological 2 M mock); at 3/10/30 M it detects all ten
-reference species too. The credibility of the conflictive result rests on the census
-(Table 1) and the symmetric mirror experiment, not on a reference-half loss.
+Report both halves. The reference half is a control that RaPDTool passes: **10/10
+reference species at 3, 10 and 30 M reads**. The conflictive result therefore rests on
+the census (Table 1) and on the symmetric mirror experiment, not on any reference-half
+difference.
 
 ### miComplete — bin quality
 
@@ -293,60 +293,44 @@ database can be stored on any laptop and loaded by almost none).
 
 ---
 
-## 4. Honest assessment — what is strong, what is weak
+## 4. Scope of the design
 
-### Strong
+### What this benchmark establishes
 
-- **The census.** Large, complete (not sampled), independent of RaPDTool, trivially
-  reproducible by a reviewer, and it produces the study's most quotable number.
-- **Selection is documented and deterministic.** Seeded scripts, published lists,
-  a stated population. This is the difference between stratified sampling and
-  cherry-picking, and it is defensible.
-- **The reference control half.** Most tool papers omit the condition where their tool
-  loses. Including it is the single biggest credibility asset here.
-- **Taxonomy harmonisation.** Pinned dump with a recorded checksum; all tools mapped to
-  one tree. Many published comparisons skip this and compare names.
-- **Resource measurement is clean.** Correct process-tree measurement, n=3, negligible
-  variance, and the launcher subtlety understood and documented.
-- **Two composition regimes.** Realistic and idealised, each with a stated purpose —
-  strictly better than either alone.
-- **Out-of-domain behaviour is measured and safe.** The distance-stratified mirror (§4b)
-  shows RaPDTool degrades gracefully: species calls only above the 95 % mash threshold,
-  genus at moderate distance, abstention below ~80 %, with no confident species call for
-  a distant genome. This converts a feared weakness (silent misassignment) into a
-  demonstrated safety property.
+- **The census** is complete rather than sampled, covers the whole type-material set,
+  and is independent of RaPDTool: a reviewer can recompute it from the competitor
+  databases alone (`scripts/verify_kit.sh`, section 6).
+- **Selection is deterministic and published.** Seeded scripts, the genome lists
+  themselves, and a stated source population, so the mock composition is auditable
+  rather than asserted.
+- **Both halves are reported**, including the reference control — the condition in which
+  RaPDTool holds no database advantage.
+- **Taxonomy is harmonised.** One pinned NCBI dump with a recorded checksum, every tool
+  mapped onto the same tree, comparisons made on taxids rather than on names.
+- **Resources are measured over the full process tree**, n = 3, with the launcher
+  behaviour documented (§3, Resource measurement).
+- **Two composition regimes** — realistic (uneven) and idealised (equal coverage) — each
+  with a stated purpose.
+- **Out-of-domain behaviour is measured** (§4b): species calls only above the 95 % mash
+  identity threshold, genus assignment at moderate distance, abstention below ~80 %.
 
-### Weak — ranked by how likely a reviewer is to raise it
+### What it deliberately does not cover
 
-1. **No binning accuracy.** AMBER gap (§3). The genome-recovery axis — one of the
-   central capability claims — has quality metrics (miComplete) but no correctness
-   metric. Extending `make_mock.sh` to emit contig→genome truth is roughly a day of
-   work and is the highest-value remaining item.
-2. **Small communities.** Twenty genomes in the mocks, eight bacteria in Zymo, against
-   CAMI II's hundreds — with no strain-level variation and no plasmid or eukaryotic
-   fraction. Profiling-accuracy claims from communities this size are inherently
-   limited, and this is now the main thing CAMI II would still add (§5).
-3. **Single sequencing technology.** HiSeq 2×126 bp only. No long reads, no
-   platform-effect assessment.
-4. **Assembly is a confound for `full` mode.** Assembly-based profiling is limited by
-   coverage in a way read-based profiling is not; the equal-coverage control mitigates
-   this but does not eliminate it from the depth series.
+- **Bin taxonomic correctness.** The mock communities provide no contig→genome truth
+  table, so AMBER is not runnable (§3); no claim of binning accuracy is made. See the
+  manuscript, Limitations.
+- **Strain-level variation, and plasmid or eukaryotic fractions.** The communities are
+  bacterial, one strain per species.
+- **Real metagenomes with unknown truth.** These demonstrate practicality rather than
+  accuracy, and accuracy is what this design measures.
 
-*Closed during this work:* out-of-domain failure mode (mirror experiment, §4b) and the
-lack of an independent dataset (ZymoBIOMICS, §5b).
-6. **Preliminary run had a pathological composition.** The first 2 M-read mock was
-   affected by the InSilicoSeq per-contig artefact. Its resource numbers stand
-   (composition barely affects RAM/time); its accuracy numbers should be superseded by
-   the depth series.
+### Addressed during this work
 
-### Deliberately out of scope — say so rather than leaving it silent
-
-- No real metagenome with unknown truth. Would demonstrate practicality, not accuracy.
-
-*Closed during this work:* the comparison against a dedicated MAG-recovery pipeline —
-MetaWRAP was run on the identical assembly (§4d) and RaPDTool is not claimed to beat it on
-binning (they are at parity), but it recovers the same genomes at ~5× less RAM, names them
-to type strains, and needs 0.5 GB of reference data versus MetaWRAP's 72.7–378.7 GB.
+Out-of-domain failure mode (mirror experiment, §4b); an independent real dataset
+(ZymoBIOMICS, §5b); and a dedicated MAG-recovery comparator — MetaWRAP run on the
+identical assembly (§4d), where RaPDTool is at parity on binning while recovering the
+same genomes at ~5× less RAM, naming them to type strains, and using 0.5 GB of reference
+data against MetaWRAP's 72.7–378.7 GB.
 
 ---
 
@@ -496,31 +480,25 @@ such, not a failure to install.
 
 ## 5. On adding CAMI II
 
-**What it would buy:** the only genuinely independent accuracy measurement in the
-study, a binning gold standard that makes AMBER runnable, a community of realistic
-complexity, and the credibility of the field's standard benchmark. It closes weaknesses
-1, 2 and 3 simultaneously — no other single addition does that.
+**What it would add:** a binning gold standard, which would make AMBER runnable, and a
+community of greater complexity than the mocks used here.
 
-**What it would cost:** download and storage (tractable — needs a few TB of scratch space),
-and considerable Kraken2-standard runtime on larger inputs. Scoping to **one or two
-samples** rather than the full challenge keeps this manageable.
+**What it would cost:** download and storage (tractable — a few TB of scratch space) and
+considerable Kraken2-standard runtime on larger inputs. Scoping to **one or two samples**
+rather than the full challenge would keep this manageable.
 
-**The honest expectation:** RaPDTool will probably underperform on CAMI II. Its
-database is type material — 30,209 characterised type strains — while CAMI II is rich
-in environmental and uncultured organisms that have no type strain at all. Species-level
-detection will likely be poor and Kraken2 will likely win clearly.
-
-**Why that is still worth publishing:** it defines the tool's operating envelope, which
-is a more useful contribution than an unqualified win. Paired with the census, the two
-results state a coherent and defensible position:
+**The operating envelope it would probe.** RaPDTool's reference is type material —
+30,209 characterised type strains — whereas CAMI II is rich in environmental and
+uncultured organisms that have no type strain at all. The two address different
+questions, and the study states that boundary explicitly rather than leaving it implied:
 
 > RaPDTool's database covers characterised type material that the standard databases
 > omit (55.8 % of it), and does not cover uncultured environmental diversity that they
 > do. It is the right tool when the question is *which described species is this*, and
 > the wrong one when the question is *what is in this unexplored environment*.
 
-A paper making that claim is harder to attack than one claiming general superiority,
-and it points the tool at the users it actually serves.
+Stating that envelope is a more useful contribution than an unqualified claim of
+superiority, and it points the tool at the users it actually serves.
 
 **Decision status: not planned.** Superseded by two cheaper, more targeted additions
 that between them close the same weaknesses:

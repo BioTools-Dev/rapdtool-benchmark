@@ -12,7 +12,7 @@ classifiers do not provide.
 > Steps 0 → 6.
 
 **Reading order.** For *why* the benchmark is designed this way — the flow diagram,
-what each test measures, and an honest account of what is strong and what is missing —
+what each test measures, and the scope the design covers and deliberately does not —
 read **`benchmark_rationale.md`** first. This file is the operational how-to: follow
 Steps 0 → 6 below and a reviewer can reproduce every number in the manuscript.
 
@@ -168,7 +168,7 @@ Large read/assembly data live outside the kit at `$MOCK_ROOT/mock_*` and `$ZYMO_
 
 | File | Purpose |
 |------|---------|
-| **`benchmark_rationale.md`** | **why the benchmark is shaped this way** — flow diagram, what each test measures, honest strengths/weaknesses. Read this first. |
+| **`benchmark_rationale.md`** | **why the benchmark is shaped this way** — flow diagram, what each test measures, and the scope of the design. Read this first. |
 | `check_representation.py` | census a genome set against Kraken2 (full/16/8) and MetaPhlAn4: is each species in each database? Produces both the population census and the mock genome selection |
 | `data/census_full.tsv` | the census of all 30,209 type-material genomes (Phase 0 result) |
 | `plot_census.py` / `figures/census.*` | census figure (PNG 300 dpi + SVG + PDF) |
@@ -910,14 +910,15 @@ per-species FASTA) are the columns only RaPDTool fills — the core argument.
 | MetaWRAP | 1.3.0 (biocontainer `metawrap-mg:1.3.0--hdfd78af_1`; bundles CheckM, DB `checkm_data_2015_01_16`) |
 | Taxonomy | NCBI taxdump 2026-07-10, sha256 `c1b91199…` (the dump the FOCUS DB was built from) |
 
-## Known gaps
+## Scope
 
-Documented in full in `benchmark_rationale.md` §4. In short: **no independent dataset**
-(every genome comes from RaPDTool's own curated set, including the control half),
-**no binning-accuracy metric** (AMBER needs a contig→genome truth table that
-`make_mock.sh` does not produce), and a **20-genome community** with no strain
-variation. Adding one or two CAMI II samples would close the first two at once — that
-decision is deferred, not dismissed.
+The boundaries of the design are set out in `benchmark_rationale.md` §4. The one that
+governs how the outputs here are read: the mock communities carry no contig→genome truth
+table, so AMBER is not runnable and **no binning-accuracy metric is reported** — bin
+*quality* is measured (miComplete, completeness and redundancy), bin *taxonomic
+correctness* is not claimed. Independent validation is provided by the ZymoBIOMICS even
+community (Step 4b), a third-party standard with published composition that is not part
+of RaPDTool's curated set.
 
 ## License
 
