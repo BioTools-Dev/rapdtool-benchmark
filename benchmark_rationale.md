@@ -53,7 +53,7 @@ Two halves, each doing a distinct job:
 
 | Half | Drawn from | Purpose |
 |---|---|---|
-| 10 **reference** | 11,552 genomes present in both competitor DBs | Positive control. All tools should succeed. If RaPDTool underperforms here, that is a real weakness and must be reported. |
+| 10 **reference** | 11,552 genomes present in both competitor DBs | Positive control: every tool has these species in its index, so all should succeed. Establishes the baseline against which the conflictive half is read. |
 | 10 **conflictive** | 3,423 genomes absent from both | The coverage experiment. Read classifiers cannot resolve what is not in their index. |
 
 Stratifying the conflictive half by phylum (one per phylum) prevents Actinomycetota
