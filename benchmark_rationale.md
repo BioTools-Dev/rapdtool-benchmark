@@ -80,9 +80,9 @@ Two composition regimes, because they answer different questions:
 | **Uneven, 3 depths** (3M/10M/30M, 20× dynamic range) | How each tool responds to sequencing depth under a realistic, uneven community | Nothing about intrinsic capability at adequate coverage — the rare members never assemble |
 | **Equal coverage, 30M** | Intrinsic capability with coverage removed as a limiting factor (all 20 genomes at 38.8×) | Nothing about realistic performance — real communities are never even |
 
-Neither is "the realistic one" and neither is redundant. Without the depth series
-nothing can be claimed about real data; without the equal-coverage control *"the tool is
-weak"* cannot be distinguished from *"the data was thin"*.
+Neither regime is "the realistic one" and neither is redundant: the depth series is what
+supports any statement about real data, and the equal-coverage control is what shows
+where each tool arrives once coverage is no longer the limiting factor.
 
 **A fixed abundance vector is used across the depth series**, so depth is the only
 variable between those three datasets. InSilicoSeq redraws a random composition on
@@ -521,7 +521,7 @@ The envelope is part of the contribution: it identifies the users the tool serve
 those it does not, which an unqualified claim of superiority would not.
 
 **Decision status: not planned.** Superseded by two cheaper, more targeted additions
-that between them close the same weaknesses:
+that between them answer the same open questions:
 
 - **The mirror experiment (§4b)** answers the out-of-domain question *directly* — and
   better than CAMI II would, because it isolates database absence as the single
