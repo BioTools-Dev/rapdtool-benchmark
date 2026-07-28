@@ -312,7 +312,9 @@ NEXT (accuracy — run manually once profiles exist):
    AMBER needs a contig->genome truth table (gold_standard_binning.tsv) and make_mock.sh
    produces only a composition gold standard (mock_composition.tsv). This is a documented
    gap, not a missing step: see README Step 5 and benchmark_rationale.md section 3.
-   Consequence: report bin QUALITY only, and make no claim of binning accuracy.
+   Consequence: bin QUALITY is reported, binning accuracy is not claimed. RaPDTool's
+   binning serves type-strain placement rather than competing on bin purity; see
+   scripts/run_metawrap.sh for that comparison on the same assembly.
 
 3) MAG quality already in RaPDTool output (miComplete); cross-check with CheckM if desired.
    To compare against a dedicated binner on the same assembly, see scripts/run_metawrap.sh.

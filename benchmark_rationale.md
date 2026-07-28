@@ -25,7 +25,11 @@ The diagram carries three independent evidence streams that meet at the results 
 - **Phase 0 alone** produces a publishable claim that involves no simulated data and
   does not depend on RaPDTool behaving well.
 - **Phases 2–5** produce the accuracy and resource claims.
-- The dashed edge to AMBER is a **known gap**, not an oversight (see §4).
+- The dashed edge to AMBER marks a **boundary of scope, not an oversight** (§3, §4).
+  Bin correctness is not measured here, and binning is not where RaPDTool competes:
+  its binning step exists to group contigs well enough that each bin can be placed
+  against its nearest type strain, quickly and at laptop-class memory. §4d measures
+  that against a dedicated MAG pipeline.
 
 ---
 
@@ -286,6 +290,17 @@ it, in increasing order of cost:
 
 Until then Phase 5 reports bin quality only, and the manuscript states that limitation.
 
+**What the binning step is for.** RaPDTool does not set out to be the most accurate
+binner available. Its binning exists to group contigs well enough that each resulting
+genome can be associated with its nearest type strain, with a Mash genomic distance, in
+minutes and within laptop-class memory — the recovered genome is the vehicle for the
+taxonomic placement, not the end product. §4d measures that trade-off directly against
+MetaWRAP on the identical assembly: parity on genomes recovered, MetaWRAP marginally
+cleaner per bin, RaPDTool at ~5× less RAM and ~23× less wall-clock and naming every bin
+to a type strain, which MetaWRAP's binning modules do not do. A benchmark of bin
+correctness would sharpen that comparison; it would not change what the binning step is
+being asked to deliver.
+
 ### Resource measurement
 
 Peak RSS and wall-clock are straightforward; the number that carries the argument is
@@ -319,7 +334,8 @@ a 103.7 GB database can be stored on any laptop and loaded by almost none.
 ### What it deliberately does not cover
 
 - **Bin taxonomic correctness.** The mock communities provide no contig→genome truth
-  table, so AMBER is not runnable (§3); no claim of binning accuracy is made. See the
+  table, so AMBER is not runnable (§3); no claim of binning accuracy is made. Binning is
+  a route to type-strain placement here rather than an end in itself (§3, §4d). See the
   manuscript, Limitations.
 - **Strain-level variation, and plasmid or eukaryotic fractions.** The communities are
   bacterial, one strain per species.
