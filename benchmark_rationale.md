@@ -88,17 +88,15 @@ where each tool arrives once coverage is no longer the limiting factor.
 variable between those three datasets. InSilicoSeq redraws a random composition on
 every invocation; three independent draws would confound depth with composition.
 
-> **Critical InSilicoSeq artefact, reported in the manuscript Methods.**
-> `iss --abundance <dist>` assigns abundance **per FASTA record (contig)**, not per
-> genome. With draft multi-contig genomes the realised per-genome abundance therefore
-> tracks **contig count**, largely regardless of the distribution requested. Measured
-> on this genome set with `--abundance uniform`: a 1,491-contig genome received 61.3 %
-> of the reads while a single-contig genome received 0.04 % — a 1,000-fold coverage
-> range from a request for uniformity. `make_abundance.py` exists to fix this: it
-> assigns per-genome fractions explicitly and splits each across that genome's contigs
-> **proportionally to contig length**, so coverage is even along each genome.
-> Any benchmark that used `iss --abundance` with draft genomes and did not check the
-> realised composition has this artefact.
+> **Why the abundance vector is written per contig.** `iss --abundance <dist>` assigns
+> abundance **per FASTA record (contig)**, not per genome, so with draft multi-contig
+> genomes the realised per-genome abundance tracks contig count rather than the
+> distribution requested (on this genome set, a uniform request gave a 1,491-contig
+> genome 61.3 % of the reads and a single-contig genome 0.04 %). `make_abundance.py`
+> therefore assigns the per-genome fractions explicitly and splits each across that
+> genome's contigs **proportionally to contig length**, so coverage is even along each
+> genome. The vector is shipped as `data/mock_abundance.txt`, and the realised
+> composition was verified against the request rather than assumed.
 
 ### Phase 3 — execution under measurement
 
