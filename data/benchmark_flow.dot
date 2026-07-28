@@ -1,7 +1,7 @@
 // benchmark_flow.dot — RaPDTool benchmark design.
 // Render:  dot -Tsvg benchmark_flow.dot -o figures/benchmark_flow.svg
 //          dot -Tpng -Gdpi=300 benchmark_flow.dot -o figures/benchmark_flow.png
-// Embedded as figures/benchmark_flow.svg in benchmark_rationale.md §1 (no mermaid copy).
+// Embedded as figures/benchmark_flow.svg in benchmark_rationale.md §1.
 
 digraph benchmark {
   rankdir=TB;

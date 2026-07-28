@@ -16,9 +16,6 @@ change to a step is judged.
 > dot -Tpng -Gdpi=300 data/benchmark_flow.dot -o figures/benchmark_flow.png
 > dot -Tpdf data/benchmark_flow.dot -o figures/benchmark_flow.pdf
 > ```
-> A hand-maintained mermaid copy used to live here; it was removed because two
-> hand-written diagrams of the same process drift apart silently. The `.dot` file is
-> the only editable copy.
 
 The diagram carries three independent evidence streams that meet at the results table:
 
