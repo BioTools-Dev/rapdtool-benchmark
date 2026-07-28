@@ -739,9 +739,10 @@ correctly flagged by miComplete's redundancy, and are reported as such (Table 5)
 > `make_mock.sh` to track each simulated read's source genome and derive the
 > contig→genome truth from the assembly (~a day's work, keeps everything in-house).
 >
-> The gap is bounded by what the binning step is for: RaPDTool does not aim to be the
-> most accurate binner, but to group contigs well enough that each genome can be
-> associated with its nearest type strain — fast, and within laptop-class memory. Step 5d
+> The gap is bounded by what the binning step is for. RaPDTool bins with **MetaBAT2 +
+> Binning_refiner** — an established, well-benchmarked combination — and claims no
+> advance in binning itself; the step is there to recover genomes good enough to be
+> associated with their nearest type strain, fast and within laptop-class memory. Step 5d
 > measures that against MetaWRAP on the identical assembly.
 
 ### Step 5b — Out-of-domain behaviour: rank resolution vs distance (mirror experiment)
@@ -922,9 +923,10 @@ The boundaries of the design are set out in `benchmark_rationale.md` §4. The on
 governs how the outputs here are read: the mock communities carry no contig→genome truth
 table, so AMBER is not runnable and **no binning-accuracy metric is reported** — bin
 *quality* is measured (miComplete, completeness and redundancy), bin *taxonomic
-correctness* is not claimed. That boundary follows the tool's purpose: binning is the
-step that makes a genome available for placement against its nearest type strain, not a
-claim to be the most accurate binner, and Step 5d measures the trade-off against a
+correctness* is not claimed. That boundary follows the tool's purpose: binning is
+performed by MetaBAT2 + Binning_refiner and is the step that makes a genome available
+for placement against its nearest type strain — the placement, not the binning
+algorithm, is what is claimed here — and Step 5d measures the trade-off against a
 dedicated MAG pipeline. Independent validation is provided by the ZymoBIOMICS even
 community (Step 4b), a third-party standard with published composition that is not part
 of RaPDTool's curated set.

@@ -26,10 +26,11 @@ The diagram carries three independent evidence streams that meet at the results 
   does not depend on RaPDTool behaving well.
 - **Phases 2–5** produce the accuracy and resource claims.
 - The dashed edge to AMBER marks a **boundary of scope, not an oversight** (§3, §4).
-  Bin correctness is not measured here, and binning is not where RaPDTool competes:
-  its binning step exists to group contigs well enough that each bin can be placed
-  against its nearest type strain, quickly and at laptop-class memory. §4d measures
-  that against a dedicated MAG pipeline.
+  Bin correctness is not measured here. The binning itself is delegated to **MetaBAT2**
+  (followed by Binning_refiner), a standard and well-validated binner — no advance in
+  binning algorithms is claimed, and none is needed: the step is there to recover
+  genomes good enough to be placed against their nearest type strain, quickly and at
+  laptop-class memory. §4d measures the whole against a dedicated MAG pipeline.
 
 ---
 
@@ -290,16 +291,19 @@ it, in increasing order of cost:
 
 Until then Phase 5 reports bin quality only, and the manuscript states that limitation.
 
-**What the binning step is for.** RaPDTool does not set out to be the most accurate
-binner available. Its binning exists to group contigs well enough that each resulting
-genome can be associated with its nearest type strain, with a Mash genomic distance, in
-minutes and within laptop-class memory — the recovered genome is the vehicle for the
-taxonomic placement, not the end product. §4d measures that trade-off directly against
-MetaWRAP on the identical assembly: parity on genomes recovered, MetaWRAP marginally
-cleaner per bin, RaPDTool at ~5× less RAM and ~23× less wall-clock and naming every bin
-to a type strain, which MetaWRAP's binning modules do not do. A benchmark of bin
-correctness would sharpen that comparison; it would not change what the binning step is
-being asked to deliver.
+**What the binning step is for.** RaPDTool does not reimplement binning: it runs
+**MetaBAT2** followed by **Binning_refiner**, an established combination benchmarked
+extensively elsewhere, so bin quality rests on a method whose behaviour is already
+documented. What the step is *for* here is to recover genomes good enough to be
+associated with their nearest type strain, with a Mash genomic distance, in minutes and
+within laptop-class memory — the recovered genome is the vehicle for the taxonomic
+placement, and the placement is the contribution. Single-binner MetaBAT2 gives up
+something to a multi-binner ensemble, and §4d measures exactly that against MetaWRAP on
+the identical assembly: parity on genomes recovered, MetaWRAP marginally cleaner per bin
+and able to split one close Enterobacteriaceae pair that RaPDTool merges, against ~5×
+more RAM, ~23× more wall-clock and bins that carry no species name. A bin-correctness
+benchmark would quantify that difference more finely; it would not change what the
+binning step is being asked to deliver.
 
 ### Resource measurement
 
@@ -334,9 +338,10 @@ a 103.7 GB database can be stored on any laptop and loaded by almost none.
 ### What it deliberately does not cover
 
 - **Bin taxonomic correctness.** The mock communities provide no contig→genome truth
-  table, so AMBER is not runnable (§3); no claim of binning accuracy is made. Binning is
-  a route to type-strain placement here rather than an end in itself (§3, §4d). See the
-  manuscript, Limitations.
+  table, so AMBER is not runnable (§3); no claim of binning accuracy is made. Binning
+  runs on established methods (MetaBAT2 + Binning_refiner) and serves type-strain
+  placement rather than being an end in itself (§3, §4d). See the manuscript,
+  Limitations.
 - **Strain-level variation, and plasmid or eukaryotic fractions.** The communities are
   bacterial, one strain per species.
 - **Real metagenomes with unknown truth.** These demonstrate practicality rather than
