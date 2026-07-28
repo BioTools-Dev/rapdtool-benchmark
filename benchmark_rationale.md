@@ -106,12 +106,11 @@ every invocation; three independent draws would confound depth with composition.
 *Elapsed (wall clock) time*. Two measurement subtleties matter:
 
 - **Every tool is launched by absolute path**, not resolved through `PATH`. This is a
-  correctness requirement, not a preference: a full overnight run once completed in
-  minutes with no data because `kraken2` and `metaphlan` exited 126 in 0.0 s per tool —
-  the conda env was not active, and this host's `PATH` begins with relative entries
-  (`.`, `./bin`, `./scripts`), so resolution depends on the working directory. The
-  script now runs a **preflight check** that aborts in seconds if any enabled tool or
-  input is missing, rather than producing an empty matrix hours later.
+  correctness requirement rather than a preference: if the environment is not active, or
+  `PATH` resolution depends on the working directory, a tool that fails to resolve exits
+  126/127 in 0.0 s and the matrix "completes" in minutes with no data instead of failing
+  loudly. The script therefore runs a **preflight check** that aborts in seconds if any
+  enabled tool or input is missing.
 - **RaPDTool specifically is launched by absolute path to its wrapper**, not through
   `conda run`. The wrapper `exec`s Apptainer, so `/usr/bin/time` measures the real
   process chain; `conda run` inserts a persistent Python parent that under-reports

@@ -46,12 +46,11 @@ RAPDTOOL_ENV="${RAPDTOOL_ENV:-}"         # Optional: run RaPDTool via 'conda run
                                          # here. NOTE: conda run inserts a persistent python parent,
                                          # so /usr/bin/time may under-report RaPDTool's peak RSS.
 
-# The other tools default to bare names (resolved on PATH), but PATH resolution has
-# already silently broken one full run: if the conda env is not active -- or if PATH
-# contains relative entries such as '.', './bin' (as this host's .zshrc does), so that
-# resolution depends on the current directory -- every tool exits 126/127 in ~0 s and
-# the matrix completes with no data. Pass ABSOLUTE paths to make the run independent of
-# shell state; BENCH_ENV_BIN sets them all at once:
+# The other tools default to bare names (resolved on PATH), which is the fragile case:
+# if the conda env is not active -- or if PATH resolution depends on the current
+# directory -- every tool exits 126/127 in ~0 s and the matrix completes with no data.
+# Pass ABSOLUTE paths to make the run independent of shell state; BENCH_ENV_BIN sets
+# them all at once:
 #   BENCH_ENV_BIN=$HOME/miniconda3/envs/rapdtool_bench/bin ./run_benchmark.sh
 BENCH_ENV_BIN="${BENCH_ENV_BIN:-}"
 KRAKEN2="${KRAKEN2:-${BENCH_ENV_BIN:+$BENCH_ENV_BIN/}kraken2}"
@@ -128,9 +127,8 @@ if [[ "$preflight_fail" == 1 ]]; then
 
 ABORTING before any tool runs.
 
-Most often the conda env is not active, or PATH resolution is unreliable (this host's
-.zshrc puts '.', './bin', './scripts' first, so resolution depends on the current
-directory). Pass absolute paths instead of relying on PATH:
+Most often the conda env is not active, or PATH resolution depends on the current
+directory. Pass absolute paths instead of relying on PATH:
 
   BENCH_ENV_BIN=$HOME/miniconda3/envs/rapdtool_bench/bin \
   RAPDTOOL=$RAPDTOOL \

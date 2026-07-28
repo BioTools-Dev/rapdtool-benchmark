@@ -463,10 +463,9 @@ plumbing and that Kraken-full fits in RAM, then re-run with `REPEATS=3` for the 
 medians — same command, only `REPEATS` changes:
 
 > ### ⚠ Pass ABSOLUTE tool paths — do not rely on `PATH`
-> This cost a full overnight run. With the conda env inactive — or on any host whose
-> `PATH` contains relative entries such as `.`, `./bin`, `./scripts` (as this one's
-> `.zshrc` does), making resolution depend on the current directory — every tool exits
-> 126/127 in 0.0 s, and the whole matrix "completes" in minutes with no data.
+> With the conda env inactive — or on any host where `PATH` resolution depends on the
+> current directory — every tool exits 126/127 in 0.0 s, and the whole matrix
+> "completes" in minutes with no data.
 >
 > `BENCH_ENV_BIN` points at the env's `bin/` and sets `kraken2`, `bracken` and
 > `metaphlan` at once; `RAPDTOOL` points at the wrapper. **With these, `conda activate`
