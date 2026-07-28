@@ -131,7 +131,7 @@ invalid comparison from this benchmark:
 | Mode | Input | Used for | Never used for |
 |---|---|---|---|
 | `screen` | reads | Accuracy head-to-head vs Kraken2/MetaPhlAn — **matched input** | Genome recovery (it produces no bins) |
-| `full` | assembly | Genome recovery, MAG quality, type-material placement | Claiming an accuracy win over read classifiers without disclosing that assembly is a prerequisite step |
+| `full` | assembly | Genome recovery, MAG quality, type-material placement — head-to-head vs MetaWRAP (§4d) on the **identical assembly** | Claiming an accuracy win over read classifiers without disclosing that assembly is a prerequisite step |
 
 ### Phase 4 — harmonisation
 
