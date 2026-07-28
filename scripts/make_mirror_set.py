@@ -15,12 +15,14 @@ Declaring a domain limitation in the manuscript ("not for uncultured organisms")
 scope statement, not evidence. Users will feed environmental data to the tool whatever
 the paper says, so the failure MODE has to be characterised:
 
-    (a) reports nothing / unclassified        -> honest failure, a defensible limitation
+    (a) reports nothing / unclassified        -> graceful failure, a stated limitation
     (b) reports a wrong species with a
-        plausible-looking Mash distance       -> silent misassignment, must be disclosed
-                                                 prominently and ideally guarded against
+        plausible-looking Mash distance       -> silent misassignment, which would have
+                                                 to be disclosed and guarded against
 
-Only (b) would be a real problem, and we do not currently know which one happens.
+(a) is what the distance series measured: across fourteen genomes the resolved rank
+tracks Mash distance, and no genome below ~80 % identity received any assignment
+(benchmark_rationale.md section 4b).
 
 Selection
 ---------

@@ -459,7 +459,7 @@ Kraken2 standard database** (103.7 GB), 17.3 % from MetaPhlAn4, and **11.3 %
 
 Pass the inputs/DBs as environment variables (they override the `CONFIG` defaults, so
 you don't edit the script). First a **`REPEATS=1` smoke test** to validate the
-plumbing and that Kraken-full fits in RAM, then re-run with `REPEATS=3` for the paper
+plumbing and that Kraken-full fits in RAM, then re-run with `REPEATS=3` for the reported
 medians — same command, only `REPEATS` changes:
 
 > ### ⚠ Pass ABSOLUTE tool paths — do not rely on `PATH`
@@ -527,9 +527,9 @@ interpret later. The mock datasets under `$MOCK_ROOT/mock_*` are expensive and v
 never delete those to fix a benchmark problem.
 
 **`REPEATS=1` is correct for accuracy**; all compared tools are deterministic, so
-replicating accuracy measures nothing. Use `REPEATS=3` on **one** dataset to get the
-resource medians for the paper, and state which dataset (and therefore which depth)
-those medians came from.
+replicating accuracy measures nothing. `REPEATS=3` is used on **one** dataset for the
+resource medians, and the reported medians name the dataset — and therefore the depth —
+they came from.
 
 Individual tools can be switched off — every toggle is environment-overridable:
 `RUN_RAPDTOOL_FULL`, `RUN_RAPDTOOL_SCREEN`, `RUN_KRAKEN_FULL`, `RUN_KRAKEN_CAP16`,
@@ -601,9 +601,9 @@ Check the `abundance mapped=…%` line on stderr for each; investigate any
 > precision result: 8,129 species vs 16 compares a filtered output against an
 > unfiltered one, which measures nothing.
 >
-> Report instead a **threshold sweep applied to every tool alike** — none / 0.1 % / 1 %.
-> The 1 % row is then RaPDTool's default operating point evaluated fairly, with the
-> same filter applied to the competitors.
+> What is reported instead is a **threshold sweep applied to every tool alike** —
+> none / 0.1 % / 1 %. The 1 % row is then RaPDTool's default operating point evaluated
+> fairly, with the same filter applied to the competitors.
 >
 > **Note for the 1 % row:** two of the twenty genomes are below 1 % by design (0.89 %
 > and 0.76 %), so maximum recall at that threshold is **18/20 for every tool**.
@@ -660,9 +660,9 @@ $OPALPY $OPAL_BIN \
 ```
 
 Gives per-rank **recall (Completeness), precision (Purity), F1, L1 norm, Bray–Curtis,
-weighted UniFrac** in `$B/opal/results.tsv` plus an HTML report. Report and interpret at
-**genus/species** (the ranks RaPDTool targets). What each metric means, and how to avoid
-misreading them, is in `benchmark_rationale.md` §3.
+weighted UniFrac** in `$B/opal/results.tsv` plus an HTML report. Reporting and
+interpretation are at **genus/species**, the ranks RaPDTool targets. What each metric
+means, and how to avoid misreading it, is in `benchmark_rationale.md` §3.
 
 > OPAL gives per-rank recall/precision/F1, L1 and Bray–Curtis. **For RaPDTool, use OPAL
 > for ABUNDANCE only (L1, Bray–Curtis).** Its OPAL recall/precision reflect the FOCUS
@@ -805,9 +805,9 @@ genome (with its measured Mash identity), the finest rank RaPDTool resolved come
 
 No genome below the 95 % threshold received a species call, and nothing below ~80 %
 identity was reported at all — i.e. **graceful degradation, a safety property**, not
-silent misassignment. State it as "below ~80 % identity RaPDTool abstains" rather than a
-precise cutoff: Mash distance saturates near 70–75 % identity, so the abstained genomes'
-exact distances are not meaningful.
+silent misassignment. The result is given as "below ~80 % identity RaPDTool abstains"
+rather than as a precise cutoff: Mash distance saturates near 70–75 % identity, so the
+abstained genomes' exact distances are not meaningful.
 
 ### Step 5c — Real-data validation (ZymoBIOMICS)
 
@@ -873,8 +873,9 @@ METAWRAP_SIF=$METAWRAP_SIF CHECKM_DB=$CHECKM_DB RAPDTOOL_SIF=$RAPDTOOL_SIF \
 
 ### Step 6 — Fill the tables
 
-Transfer the medians (Step 1), OPAL metrics (Step 4), miComplete + bin counts (Step 5),
-the MetaWRAP MAG comparison (Step 5d), and DB sizes into your manuscript results tables.
+The medians (Step 1), OPAL metrics (Step 4), miComplete + bin counts (Step 5), the
+MetaWRAP MAG comparison (Step 5d) and DB sizes are what fill the manuscript results
+tables (Tables 1–5).
 The genome-recovery / type-material rows (genomes recovered,
 completeness/redundancy, type-material placement, novel-taxon resolution,
 per-species FASTA) are the columns only RaPDTool fills — the core argument.

@@ -1,8 +1,8 @@
 # Benchmark design — flow, rationale, and what each test actually measures
 
-This document explains **why the benchmark is shaped the way it is**. `README.md` is
-the operational how-to; this is the reasoning behind it. Read this before writing the
-manuscript, and before changing any step.
+This document records **why the benchmark is shaped the way it is**. `README.md` is the
+operational how-to; this is the reasoning behind it, and the reference against which any
+change to a step is judged.
 
 ---
 
@@ -17,10 +17,10 @@ manuscript, and before changing any step.
 > dot -Tpdf data/benchmark_flow.dot -o figures/benchmark_flow.pdf
 > ```
 > A hand-maintained mermaid copy used to live here; it was removed because two
-> hand-written diagrams of the same process drift apart silently. Edit the `.dot`
-> and re-render.
+> hand-written diagrams of the same process drift apart silently. The `.dot` file is
+> the only editable copy.
 
-Read the diagram as three independent evidence streams that meet at the results table:
+The diagram carries three independent evidence streams that meet at the results table:
 
 - **Phase 0 alone** produces a publishable claim that involves no simulated data and
   does not depend on RaPDTool behaving well.
@@ -35,15 +35,17 @@ Read the diagram as three independent evidence streams that meet at the results 
 
 **Question:** what does each database actually contain?
 
-Every accuracy benchmark on a hand-picked community invites the same objection: *you
-chose the organisms*. The census removes that argument from the accuracy discussion by
+Every accuracy benchmark on a hand-picked community invites the same objection: *the
+organisms were chosen*. The census removes that argument from the accuracy discussion by
 answering the coverage question separately, over the entire reference set, with no
 sampling at all. It converts the later mock result from an anecdote about 20 genomes
 into a sample from a population whose size is known.
 
-It is also the only result here that is **independent of RaPDTool's behaviour**. If
-every accuracy number came out badly, "Kraken2's 103.7 GB standard database omits
-55.8 % of characterised type material" would still stand. Lead with it.
+It is also the only result here that is **independent of RaPDTool's behaviour**: it is
+computed from the competitor databases' own taxonomies, with RaPDTool never invoked.
+The statement "Kraken2's 103.7 GB standard database omits 55.8 % of characterised type
+material" therefore stands whatever the accuracy results show, which is why it is
+presented first.
 
 ### Phase 1 — community design
 
@@ -61,7 +63,7 @@ and Pseudomonadota — over half the absent population — from dominating the s
 
 ### Phase 2 — data generation
 
-**Question:** how do we get reads whose truth we know, without handing RaPDTool its
+**Question:** how are reads of known composition obtained without handing RaPDTool its
 own reference files?
 
 Reads are simulated and then **re-assembled**, so RaPDTool's assembly-based mode
@@ -71,20 +73,20 @@ can — but it removes the trivial "it is reading its own input" objection.
 
 Two composition regimes, because they answer different questions:
 
-| Regime | What it isolates | What it cannot tell you |
+| Regime | What it isolates | What it cannot establish |
 |---|---|---|
 | **Uneven, 3 depths** (3M/10M/30M, 20× dynamic range) | How each tool responds to sequencing depth under a realistic, uneven community | Nothing about intrinsic capability at adequate coverage — the rare members never assemble |
 | **Equal coverage, 30M** | Intrinsic capability with coverage removed as a limiting factor (all 20 genomes at 38.8×) | Nothing about realistic performance — real communities are never even |
 
-Neither is "the realistic one" and neither is redundant. Without the depth series you
-cannot claim anything about real data; without the equal-coverage control you cannot
-distinguish *"the tool is weak"* from *"the data was thin"*.
+Neither is "the realistic one" and neither is redundant. Without the depth series
+nothing can be claimed about real data; without the equal-coverage control *"the tool is
+weak"* cannot be distinguished from *"the data was thin"*.
 
 **A fixed abundance vector is used across the depth series**, so depth is the only
 variable between those three datasets. InSilicoSeq redraws a random composition on
 every invocation; three independent draws would confound depth with composition.
 
-> **Critical InSilicoSeq artefact — document this in the manuscript.**
+> **Critical InSilicoSeq artefact, reported in the manuscript Methods.**
 > `iss --abundance <dist>` assigns abundance **per FASTA record (contig)**, not per
 > genome. With draft multi-contig genomes the realised per-genome abundance therefore
 > tracks **contig count**, largely regardless of the distribution requested. Measured
@@ -134,7 +136,7 @@ invalid comparison from this benchmark:
 
 ### Phase 4 — harmonisation
 
-**Question:** are we comparing taxa, or comparing spelling?
+**Question:** is the comparison between taxa, or between spellings?
 
 Each tool reports its own taxonomy with its own names and its own rank strings. FOCUS
 uses updated phylum names (*Pseudomonadota*), Kraken2 carries its database's taxdump,
@@ -143,13 +145,13 @@ taxid** and re-derives the full standard-rank lineage from **one pinned taxonomy
 (the same one the reference database was built from, SHA-256 recorded). Without this,
 apparent differences between tools are partly nomenclature.
 
-Two operational rules, both learned the hard way:
+Two operational rules follow, both established by failed runs:
 
-- **Every profile, including the gold standard, must carry the same `SampleID`**
+- **Every profile, including the gold standard, carries the same `SampleID`**
   (`-s mock`). OPAL silently skips any profile whose sample ID does not match the gold
   standard, and then reports that nothing could be evaluated.
-- Check the `abundance mapped=…%` line for each conversion. Below ~90 %, investigate
-  before trusting any downstream metric.
+- The `abundance mapped=…%` line is checked for every conversion; below ~90 % the
+  conversion is investigated before any downstream metric is used.
 
 ### Phase 5 — evaluation
 
@@ -157,8 +159,8 @@ See §3 for what each metric means.
 
 #### RaPDTool has two species outputs — detection from mash, abundance from FOCUS
 
-This is the single most consequential measurement decision in the benchmark, and it was
-initially got wrong. RaPDTool emits two species-level outputs from different engines:
+This is the single most consequential measurement decision in the benchmark. RaPDTool
+emits two species-level outputs, produced by different engines:
 
 - **`rapdtool_confidence.tbl` — the mash-screen containment table.** RaPDTool's confident
   species DETECTION: reference genomes contained in the sample above a threshold, with
@@ -186,10 +188,10 @@ Because the FOCUS *abundance* profile does carry a false-positive tail, interpre
 requires a cutoff. A threshold applied uniformly to every tool's output profile
 (post-hoc, downstream of each tool's own detection gate) raises FOCUS-based F1 past
 MetaPhlAn at ≥0.1 % and to 1.0 at 0.5 % (`figures/f1_threshold.*`, `threshold_sweep.*`).
-Report this as **context for reading FOCUS abundance**, not as RaPDTool's detection
-result — the mash table already gives F1 1.0 with no threshold. Two honest notes if the
-sweep is shown: the cutoff is not MetaPhlAn's internal marker gate (which cannot be
-applied to other tools), so it is disclosed as a post-hoc output filter; and a 1 % cutoff
+This sweep is **context for reading FOCUS abundance**, not RaPDTool's detection
+result — the mash table already gives F1 1.0 with no threshold. Two conditions attach to
+it: the cutoff is not MetaPhlAn's internal marker gate (which cannot be
+applied to other tools), so it is reported as a post-hoc output filter; and a 1 % cutoff
 drops the two genomes below 1 % abundance by design (smallest true abundance 0.76 %),
 which is why 0.5 % — keeping all twenty with no false positives — is the FOCUS operating
 point, not 1 %.
@@ -201,7 +203,7 @@ sweep applied identically to every tool**: no filter (the OPAL primary), and 0.1
 precision 1.0, F1 1.0 (`figures/f1_threshold.*`); 1 % is worth reporting only because it
 is the current default.
 
-> **Design interaction to state explicitly.** Two of the twenty genomes sit below 1 %
+> **Design interaction.** Two of the twenty genomes sit below 1 %
 > abundance by construction (0.89 % and 0.76 %), so a 1 % threshold necessarily drops
 > them — a design artefact, not a miss. In practice a 1 % cutoff on RaPDTool screen
 > recovers 16/20, not the design ceiling of 18/20, because FOCUS's estimated abundance
@@ -222,7 +224,7 @@ Compares a predicted profile against the gold standard at every rank.
 |---|---|---|
 | **Recall** | Of the taxa truly present, how many were found? | Penalises missing taxa. A conservative tool scores low. |
 | **Precision** | Of the taxa reported, how many were really there? | Penalises false positives. A permissive tool scores low. |
-| **F1** | Harmonic mean of the two | One number, but it hides *which* error dominates — always report the components. |
+| **F1** | Harmonic mean of the two | One number, but it hides *which* error dominates, so the components are reported alongside it. |
 | **L1 norm** | Total absolute abundance error, summed across taxa (0 = perfect, 2 = maximally wrong) | Presence/absence-insensitive tools can still score badly if they get proportions wrong. |
 | **Bray–Curtis** | Ecological dissimilarity from the true community (0 = identical, 1 = no overlap) | The metric an ecologist will look for. Dominated by abundant taxa. |
 | **Weighted UniFrac** | Abundance-weighted error that accounts for how *related* the mistakes are | Confusing a species with its sister costs less than confusing it with another phylum. Fairest metric when tools disagree at fine ranks. |
@@ -248,7 +250,7 @@ can report a taxon absent from its database (it cannot), and is interpretable be
 reference half controls for everything else. RaPDTool detects 10/10 reference **and**
 10/10 conflictive; the competitors detect 10/10 reference and 0/10 conflictive.
 
-Report both halves. The reference half is a control that RaPDTool passes: **10/10
+Both halves are reported. The reference half is a control that RaPDTool passes: **10/10
 reference species at 3, 10 and 30 M reads**. The conflictive result therefore rests on
 the census (Table 1) and on the symmetric mirror experiment, not on any reference-half
 difference.
@@ -282,14 +284,14 @@ it, in increasing order of cost:
    everything in-house; produces exactly the file AMBER wants.
 2. **Use a dataset that ships one** — CAMI II includes a binning gold standard (§4).
 
-Until then Phase 5 reports bin quality only, and the manuscript must say so.
+Until then Phase 5 reports bin quality only, and the manuscript states that limitation.
 
 ### Resource measurement
 
 Peak RSS and wall-clock are straightforward; the number that carries the argument is
 **database size on disk**, because it determines whether the tool can be deployed at
-all. Report it separately from peak RAM — they are different constraints (a 103.7 GB
-database can be stored on any laptop and loaded by almost none).
+all. It is reported separately from peak RAM, since the two are different constraints:
+a 103.7 GB database can be stored on any laptop and loaded by almost none.
 
 ---
 
@@ -382,22 +384,22 @@ with "degrades gracefully", and the genus-zone organisms (whose genus *is* in th
 database) double as evidence that when species-level resolution is not warranted,
 RaPDTool still recovers the genus correctly rather than guessing.
 
-**How to state it honestly.** Mash distance saturates around 0.25–0.30 (~70–75 %
+**Precision of the statement.** Mash distance saturates around 0.25–0.30 (~70–75 %
 identity) for anything beyond family level, so the three abstained genomes cluster there
-and their exact distances are not meaningful — write "below ~80 % identity RaPDTool
-abstains", not a falsely precise cutoff. And this is *out-of-domain behaviour*, not a
-profiling-accuracy claim: it shows the tool fails safe, which is a different (and
-arguably more important) property than how well it profiles in domain.
+and their exact distances are not meaningful; the result is therefore given as "below
+~80 % identity RaPDTool abstains" rather than as a sharp cutoff. It describes
+*out-of-domain behaviour*, not profiling accuracy: the tool fails safe, which is a
+different — and arguably more important — property than in-domain profiling performance.
 
 > **Earlier framing, now superseded.** An initial mirror run used ten random
 > phylum-stratified genomes and was contaminated: four were species RaPDTool actually
 > held under a strain taxid (a species-vs-strain comparison bug, since fixed — see the
-> census note). That run is discarded. It did surface the bug, which is why the control
-> earned its keep.
+> census note). That run is discarded; it is recorded here because it is what surfaced
+> the bug.
 
 ## 4c. What the two-way database comparison showed
 
-Running the census in both directions produced the study's most defensible framing:
+Running the census in both directions gives the symmetric picture:
 
 | | species |
 |---|---:|
@@ -413,8 +415,8 @@ described/undescribed axis rather than in quality. Kraken2 indexes environmental
 undescribed diversity the type-material set excludes by construction; the type-material
 set covers characterised type strains Kraken2 mostly lacks.
 
-This is a stronger position than any superiority claim, because it is verifiable,
-symmetric, and makes the niche argument follow from scope rather than from performance.
+The comparison is symmetric and verifiable from the two databases' own taxonomies, and
+the niche argument follows from scope rather than from relative performance.
 
 ## 4d. MAG recovery vs a dedicated pipeline (MetaWRAP)
 
@@ -440,7 +442,7 @@ The result is **parity on recovery, MetaWRAP marginally cleaner, at a large reso
 | Median contamination | 2.4 % | 1.9 % | 2.8 % | 2.4 % |
 | Per-bin species name | type strain + Mash distance | none | type strain | none |
 
-Four honest statements:
+Four statements follow from that table:
 
 1. **Recovery is at parity.** Both recover the same genomes; MetaWRAP's <10 % contamination
    filter removes the two chimeras RaPDTool reports — expected, because binning is MetaWRAP's
@@ -465,7 +467,7 @@ Four honest statements:
 
 **Deployment footprint — three levels.** MetaWRAP is modular, so count only the databases each
 capability needs (sizes verbatim from the MetaWRAP README): binning/refinement needs **only
-CheckM's 1.4 GB** — we did not download more, and do not imply binning requires it. But naming
+CheckM's 1.4 GB** — no further databases were installed, and binning does not require them. But naming
 the bins (reaching what RaPDTool outputs natively) needs `classify_bins` → **+71 GB** of
 NCBI_nt, and the documented end-to-end workflow totals **378.7 GB**. RaPDTool's footprint is
 **0.504 GB and constant** across all three levels, because one database delivers binning *and*
@@ -497,8 +499,8 @@ questions, and the study states that boundary explicitly rather than leaving it 
 > do. It is the right tool when the question is *which described species is this*, and
 > the wrong one when the question is *what is in this unexplored environment*.
 
-Stating that envelope is a more useful contribution than an unqualified claim of
-superiority, and it points the tool at the users it actually serves.
+The envelope is part of the contribution: it identifies the users the tool serves and
+those it does not, which an unqualified claim of superiority would not.
 
 **Decision status: not planned.** Superseded by two cheaper, more targeted additions
 that between them close the same weaknesses:
@@ -510,8 +512,8 @@ that between them close the same weaknesses:
 - **ZymoBIOMICS (§5b)** supplies real sequencing data for a community defined by a
   third party, which is the independence CAMI II was wanted for.
 
-What remains **unaddressed** by this substitution, and should be stated as a limitation
-rather than glossed over:
+What remains **unaddressed** by this substitution, and is carried into the manuscript as
+a limitation:
 
 1. **Community complexity.** Zymo has 8 bacterial species and the mocks have 20. CAMI II
    has hundreds, with strain-level variation. No result here speaks to performance on
@@ -520,12 +522,13 @@ rather than glossed over:
    extending `make_mock.sh` to emit contig→genome truth is the in-house alternative and
    remains the cheapest way to close this.
 
-Revisit if a reviewer asks for community-complexity evidence — that is the one thing
-neither substitute provides.
+Community-complexity evidence is the one element neither substitute supplies, and is the
+condition under which this decision would be revisited.
 
 ## 5b. On ZymoBIOMICS as the real-data control
 
-**What it is for:** every other dataset here is simulated from genomes we selected. Zymo
+**What it is for:** every other dataset here is simulated from genomes selected for this
+study. Zymo
 is real Illumina sequencing of a community whose composition a third party defined and
 certified. It answers "does this work on data the authors did not construct?", which
 nothing else in the study does.
@@ -534,42 +537,43 @@ nothing else in the study does.
 three databases compared — verified against `data/census_full.tsv`. No tool has a coverage
 advantage, in either direction, so the result cannot be an artefact of genome selection.
 Choosing a dataset because it matches the tool's domain is correct design; choosing one
-because you win on it is not. The distinction is whether the domain boundary is stated,
-and here it is: see the corollary below.
+because the tool wins on it is not. The distinction lies in whether the domain boundary
+is stated, and it is stated in the corollary below.
 
 **What it cannot show:** the eight species are common, well-characterised clinical
 organisms — precisely the regime where RaPDTool is *not* differentiated. Zymo
 demonstrates competence and parity on real data. It contributes nothing to the
-coverage argument, which rests on the census and the conflictive mock. Do not let the
-two be conflated in the Results.
+coverage argument, which rests on the census and the conflictive mock; the two are
+reported as separate results.
 
-**Two disclosures it forces** (both from the ZymoBIOMICS D6300/D6310 manual, ver. 1.3.0):
+**Two conditions it imposes** (both from the ZymoBIOMICS D6300/D6310 manual, ver. 1.3.0):
 
 1. The two yeasts (4 % of DNA) are outside every bacterial/archaeal database compared;
-   the gold standard is renormalised to the eight bacteria and this must be stated.
+   the gold standard is renormalised to the eight bacteria, and that renormalisation is
+   reported.
 2. **Sequence abundance ≠ cell abundance.** Bracken reports the former (12 % per species
    here), MetaPhlAn the latter (6.1–21.6 %, genome-size normalised). Scoring both
    against one basis penalises one by up to two-fold. Zymo publishes both columns
-   precisely because the distinction matters; evaluate each tool against the
-   appropriate basis and say so.
+   precisely because the distinction matters, so each tool is evaluated against the
+   appropriate basis and the basis is named in the results.
 
 ---
 
 ## 6. Why RaPDTool has a niche despite Kraken2 being excellent
 
 Kraken2 is faster per read, more sensitive on well-represented taxa, and better
-engineered for scale. None of that is in dispute, and the manuscript should say so
-plainly. The niche argument does not require Kraken2 to be worse; it requires the two
-tools to answer different questions.
+engineered for scale. None of that is in dispute, and the manuscript states it plainly.
+The niche argument does not require Kraken2 to be worse; it requires the two tools to
+answer different questions.
 
 1. **The coverage gap is not a capacity problem, so it cannot be bought away.**
    Kraken2's standard database omits 55.8 % of characterised type material at 103.7 GB.
    Capping to 8.1 GB changes that by <0.01 pp. More RAM does not fix it; only a
    differently *composed* database does.
 
-2. **The pincer.** To match RaPDTool's 6.73 GB memory footprint you must run a capped
-   Kraken2 database — which loses sensitivity *and* still carries the full coverage gap.
-   To get Kraken2's best sensitivity you need ~104 GB of RAM. RaPDTool occupies the
+2. **The pincer.** Matching RaPDTool's 6.73 GB memory footprint requires a capped
+   Kraken2 database, which loses sensitivity *and* still carries the full coverage gap;
+   Kraken2's best sensitivity requires ~104 GB of RAM. RaPDTool occupies the
    corner neither configuration reaches: laptop-class memory with type-material coverage.
 
 3. **Different output object.** Kraken2 labels reads. RaPDTool returns genome bins,

@@ -1,8 +1,8 @@
 # Mock community design (novel-taxon benchmark)
 
 A 20-genome synthetic community of **type-material** genomes drawn from the
-`focus_build` DB, split into two functional halves so the benchmark separates a
-*fair-fight baseline* from the *capability argument*:
+`focus_build` DB, split into two functional halves so that the baseline comparison and
+the coverage argument are measured separately:
 
 - **10 reference** — species present in **all** competitor DBs (Kraken2 standard,
   standard16, standard8, **and** MetaPhlAn4). All tools should classify these to
@@ -21,11 +21,11 @@ so the mock resembles a real diverse community rather than a clinical panel.
 
 ## The population these genomes were sampled from (answers the obvious objection)
 
-The obvious reviewer objection is circularity: *you chose genomes you already knew
-were missing from the competitor databases, then reported that the competitors miss
-them.* The defence is that those genomes are not exotic picks — they are a
-**stratified sample of a large, quantified population**, and the census that
-establishes it is shipped with this kit.
+The obvious objection is circularity: *the genomes were chosen because they were known
+to be missing from the competitor databases, and the result is that the competitors miss
+them.* The answer is that those genomes are not exotic picks — they are a **stratified
+sample of a large, quantified population**, and the census that establishes that
+population is shipped with this kit.
 
 Censusing **all 30,209** type-material genomes in `focus_build/db`
 (`check_representation.py --sample 30209 --seed 42 -o data/census_full.tsv`):
@@ -48,9 +48,9 @@ Two findings stand on their own, independent of which 20 genomes went into the m
 
 So the 10 conflictive genomes are a **phylum-stratified sample (one per phylum) of
 the 3,423-genome absent-from-both population**, and the 10 reference genomes are a
-control drawn from the 11,552 present in both. That is standard sampling
-methodology, not cherry-picking — and it is what should be written in the Methods,
-rather than "we selected genomes absent from the competitor databases".
+control drawn from the 11,552 present in both. That is stratified sampling from a
+quantified population rather than selection of convenient cases, and the Methods
+describe it in those terms.
 
 Figure: `figures/census.png` / `.pdf`, from `plot_census.py`.
 

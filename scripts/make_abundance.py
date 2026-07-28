@@ -11,7 +11,7 @@ depending on iss's RNG.
 Design of the vector:
   * Log-spaced genome abundances spanning --range (default 20x). This keeps the
     community realistically uneven -- real metagenomes are never uniform -- while
-    avoiding the pathological draw we got from plain lognormal (one taxon at 61 %,
+    avoiding the extreme draw obtained from plain lognormal (one taxon at 61 %,
     1500x dynamic range), where the rare members stayed below 0.25x coverage even at
     30 M reads and could not assemble at any affordable depth.
   * Abundance ranks are INTERLEAVED between the 'reference' and 'conflictive' halves

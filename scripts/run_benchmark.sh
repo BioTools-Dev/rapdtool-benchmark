@@ -308,7 +308,7 @@ NEXT (accuracy — run manually once profiles exist):
    -> genus/species recall, precision, L1 norm, Bray-Curtis, weighted UniFrac.
    (profile2cami.py resolves taxonomy via taxonkit or ete3 per step 0; no other setup.)
 
-2) Bin CORRECTNESS (AMBER) is NOT runnable on this mock -- do not go looking for the file.
+2) Bin CORRECTNESS (AMBER) is NOT runnable on this mock, and no such file is produced.
    AMBER needs a contig->genome truth table (gold_standard_binning.tsv) and make_mock.sh
    produces only a composition gold standard (mock_composition.tsv). This is a documented
    gap, not a missing step: see README Step 5 and benchmark_rationale.md section 3.
@@ -317,6 +317,6 @@ NEXT (accuracy — run manually once profiles exist):
 3) MAG quality already in RaPDTool output (miComplete); cross-check with CheckM if desired.
    To compare against a dedicated binner on the same assembly, see scripts/run_metawrap.sh.
 
-Fill the manuscript results tables (Tables 1-5) with the medians above + the OPAL outputs.
-Do not fabricate any value.
+The manuscript results tables (Tables 1-5) are filled from the medians above plus the
+OPAL outputs; every value in them comes from a file written by this run.
 EOF
