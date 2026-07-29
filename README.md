@@ -494,6 +494,22 @@ Individual launchers can also be set one by one (`KRAKEN2=`, `BRACKEN=`,
 
 **Give each dataset its own `OUTDIR`** — `run_benchmark.sh` *appends* to
 `summary.csv`, so a shared output directory silently mixes datasets into one file.
+
+> ### ⚠ Clear the shipped `bench_*` directory before re-running into it
+> The clone ships each dataset's `summary.csv` with the study's own rows, and the append
+> above is unconditional: the header is written only when the file is absent. Pointing
+> `OUTDIR` at a shipped directory therefore adds the new rows *underneath* the committed
+> ones, and the medians printed at the end are computed over both runs at once — with
+> nothing in the file marking which rows came from which. Delete the directory first:
+>
+> ```bash
+> rm -rf results/bench_ln_30M      # re-run rebuilds it, header included
+> ```
+>
+> `git checkout -- results/` restores the committed copies afterwards. Only `summary.csv`
+> behaves this way: `db_sizes.csv` is truncated at the start of each run and the RaPDTool
+> output directories are overwritten (`--force`), so both are safe to re-run over.
+
 To run the whole matrix (~6 h; MetaPhlAn scales linearly with read count):
 
 ```bash
@@ -789,24 +805,34 @@ scripts/plot_mirror_distance.py     # -> figures/mirror_distance.{svg,png,pdf}
 ```
 
 **What to read is the resolved rank vs distance, not an accuracy score.** For each input
-genome (with its measured Mash identity), the finest rank RaPDTool resolved comes from:
+genome (with its measured Mash identity), the finest rank RaPDTool resolved is read from
+**`results/bench_mirrordist/rapdtool.rep1/rapdtool_confidence.tbl` — the `full`-mode
+table**, which is the path whose cutoffs are fixed and documented. `rapdtool_results.pl`
+sorts each bin by its Mash **distance** to the nearest reference:
 
-- `results/bench_mirrordist/rapdtool_screen.rep1/rapdtool_confidence.tbl` — the mash-screen
-  **species** calls (only above the ~95 % threshold)
-- `.../profilesfmbm/*/output_All_levels.csv` — the FOCUS profile; a genome's **genus**
-  appearing here (but not in the confidence table) is a genus-level call
-- `results/bench_mirrordist/rapdtool.rep1/species_bins/` — bin names carry species where
-  resolved and genus-only where not
+| Block in the table | Mash distance | Identity | Rank |
+|---|---|---|---|
+| `Species with high confidence` | < 0.05 | > 95 % | species |
+| `Genus with high confidence` | 0.05 – 0.08 | 92 – 95 % | genus |
+| `FOCUS profile` only | ≥ 0.08 | < 92 % | genus, if FOCUS places it |
+| absent from all three | — | — | no call |
+
+> **Why not screen mode.** `screen` applies a single `--screen-identity` cutoff (0.95)
+> with no genus tier, so classifying this experiment from `screen` reports every genus
+> call as FOCUS-derived and leaves the tool's own genus threshold untested. Both modes
+> run here and both tables ship; `plot_mirror_distance.py` reads the `full` one. The
+> x axis is independent of either — it is the measured minimum Mash distance to the
+> database from `data/mirror_distance.tsv`.
 
 **Result on the shipped 14-genome set (all behaved correctly):**
 
-| Mash identity to nearest DB genome | rank resolved |
-|---|---|
-| 100 % (in DB, positive control) | species |
-| 97–99 % | species (nearest congener) |
-| 92–95 % | **genus only** (mash stops calling species at 95 %) |
-| 82–91 % | genus (FOCUS profile) |
-| 70–76 % | **abstains — not reported** |
+| Mash identity to nearest DB genome | rank resolved | resolved by | n |
+|---|---|---|---:|
+| 100 % (in DB, positive control) | species | Mash, species tier | 2 |
+| 97–99 % | species (nearest congener) | Mash, species tier | 3 |
+| 92–95 % | **genus only** — Mash stops calling species at 95 % | Mash, genus tier | 3 |
+| 82–91 % | genus — beyond Mash's 0.08 cutoff | FOCUS profile only | 3 |
+| 70–76 % | **abstains — not reported** | — | 3 |
 
 No genome below the 95 % threshold received a species call, and nothing below ~80 %
 identity was reported at all — i.e. **graceful degradation, a safety property**, not

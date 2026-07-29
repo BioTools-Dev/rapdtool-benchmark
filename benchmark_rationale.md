@@ -364,7 +364,7 @@ organisms" is a scope statement, not evidence. Users feed environmental data to 
 regardless of what the paper says, so the *failure mode* has to be measured, not assumed.
 
 **The right question is not binary.** RaPDTool's mash step calls a species above ~95 %
-identity to a database genome and a genus around 93–95 %; below that it should back off
+identity to a database genome and a genus between 92 and 95 %; below that it should back off
 to a coarser rank rather than assert a confident wrong species. So the meaningful test
 is not "abstain vs misassign" but whether **the rank RaPDTool resolves an organism to
 tracks its genomic distance from the database** — species only when genuinely close,
@@ -372,14 +372,39 @@ genus at moderate distance, nothing when far. Graceful degradation along that gr
 is the desirable, safe behaviour; a species call for a distant genome is the failure.
 
 **Design.** Fourteen genomes spanning the full range of genomic distance to RaPDTool's
-mash database, selected with `make_mirror_distance.py`: candidates were drawn from three
-novelty tiers (genus present in RaPDTool / genus absent, family present / family absent),
-downloaded, and the **minimum Mash distance to RaPDTool's database was measured** for
-each — that measured distance, not the taxonomy tier, is the experiment's x-axis. The
-set includes two species RaPDTool actually contains (Mash identity 100 %) as positive
-controls, so the low-distance end is anchored too. Reads were simulated at equal coverage
-(27.7×) so non-detection cannot be blamed on depth, and Kraken2 was run as a positive
-control (all fourteen are in its database by construction).
+mash database. The sampling frame is the **9,640-species mirror pool** — species present
+in the Kraken2 standard database and absent from RaPDTool's type-material set, built by
+`make_mirror_set.py` and shipped as `data/mirror_pool.tsv`. The set was assembled in three
+parts:
+
+| Part | n | How it was obtained |
+|---|---:|---|
+| **Distance-measured sample** | 9 | `make_mirror_distance.py --per-tier 6 --seed 42` drew six candidates from each of three novelty tiers (genus present in RaPDTool / genus absent, family present / family absent), downloaded them, and **measured the minimum Mash distance to RaPDTool's database** for each. All eighteen measurements ship as `data/mirror_distance.tsv`; the six tier-A genomes and three phylum-diverse tier-C genomes were kept. |
+| **Genus-band fill** | 3 | Drawn from the same pool by hand, with the measured Mash identity recorded in the list (94.5 %, 94.1 %, 92.3 %). The tiered sample jumps straight from 97.0 % to 90.9 % identity, leaving the 92–95 % genus zone — precisely where the species/genus boundary is expected — empty. |
+| **Positive controls** | 2 | Species RaPDTool does contain (Mash identity 100 %), anchoring the low-distance end. |
+
+**Twelve of the fourteen are therefore absent from RaPDTool and two are present.** The
+measured distance, not the taxonomy tier, is the experiment's x-axis; the tiers exist only
+as a sampling device, because an unstratified draw from the pool lands almost entirely in
+the Mash-saturated zone below 76 % identity, where the question this experiment asks
+cannot be answered. (Tier A alone produced the whole informative gradient — 99.5, 98.3,
+97.0, 90.9, 90.1, 81.8 % — while tiers B and C returned nothing above 76 %. The three far
+genomes kept are tier C rather than tier B because four of the six tier-B candidates were
+*Wolbachia* endosymbionts sharing one nearest reference, which would have contributed
+three redundant points instead of three distinct phyla.)
+
+Reads were simulated at equal coverage (27.7×) so non-detection cannot be blamed on depth,
+and Kraken2 was run as a positive control: **all fourteen are in its database by
+construction**, so a RaPDTool abstention cannot be attributed to a bad read set. Without
+that control, silence would be uninterpretable.
+
+> **Reproducing the selection.** `data/mirror_distance.tsv` holds the eighteen measured
+> candidates, not the final fourteen: the three genus-band genomes were picked from the
+> pool after that table was written and do not appear in it, and the two positive controls
+> are not pool members at all. Re-running the command above regenerates the eighteen and
+> leaves the genus band empty. The experiment itself reproduces from
+> `data/mirror_dist_genomes.list`, which names all fourteen with taxid and measured
+> identity; that list, not the candidate table, is the input to `make_mock.sh`.
 
 **Result: RaPDTool degrades gracefully, with no exceptions across the fourteen**
 (`figures/mirror_distance.{svg,png,pdf}`):
